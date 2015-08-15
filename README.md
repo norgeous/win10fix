@@ -13,8 +13,8 @@ Semi-automate procedure that need to be done to a clean install of Windows 10
 
 # Sources
 
-#### run .ps1 as admin from .bat
-#### http://blog.danskingdom.com/allow-others-to-run-your-powershell-scripts-from-a-batch-file-they-will-love-you-for-it/
+* run .ps1 as admin from .bat
+* http://blog.danskingdom.com/allow-others-to-run-your-powershell-scripts-from-a-batch-file-they-will-love-you-for-it/
 
-#### Remove folders from 'This PC'
-#### http://www.tenforums.com/tutorials/6015-pc-folders-add-remove-windows-10-a.html
+* Remove folders from 'This PC'
+* http://www.tenforums.com/tutorials/6015-pc-folders-add-remove-windows-10-a.html
