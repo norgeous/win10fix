@@ -1,6 +1,20 @@
-If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
+Write-Host "Starting..."
+
+If(-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
     Write-Warning "You do not have Administrator rights to run this script!`nPlease re-run this script as an Administrator!"
     Break
+}
+
+################################################################################################################################
+
+function DoAndDisplay([array]$options){
+	Write-Host "`n"
+	Write-Host $options.title
+	Write-Host "`n"
+	& $options.action
+	Write-Host "`n"
+	Write-Host "completed!"
+	Write-Host "`n"
 }
 
 function Prompt-Choice([array]$options){
@@ -11,236 +25,231 @@ function Prompt-Choice([array]$options){
 	return $Host.UI.PromptForChoice("", "", $choices, 0)
 }
 
-clear
-Write-Host "`n"
-Write-Host "Intro text"
-Write-Host "`n"
-Write-Host "Please read the options carefully!"
-Write-Host "`n"
-Write-Host "Continue?"
-Switch(Prompt-Choice @('&Yes','&No')) {
-	1{
-		Break
+function Make-Page([array]$options){
+	clear
+	Write-Host "`n"
+	#Write-Host "************************************************************************"
+	#Write-Host "`n"
+	Write-Host $options.text
+	Write-Host "`n"
+	#Write-Host "************************************************************************"
+	#Write-Host "`n"
+	& $options.action
+	Write-Host "`n"
+	pause
+
+}
+
+################################################################################################################################
+
+Make-Page @{
+	"text"="Intro text`n`nread the README.md for a full description`nPotentially harmfull script`nthis script can make perminant changes to your system`nuse CTRL+C to exit the wizzard at any time...`nselection is case insensative`n`nContinue the script?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				Write-Host "`n"
+				Write-Host "The script will now continue..."
+				Write-Host "Please read the options for each page carefully!"
+			}
+			1{
+				Write-Host "EXIT HERE"
+				Break
+			}
+		}
 	}
 }
 
-clear
-Write-Host "`n"
-Write-Host "Install Chocolatey and Chocolatey GUI?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Both','&Chocolatey only','&Neither')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing Chocolatey"
-		Write-Host "`n"
-		#iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
-		Write-Host "`n"
-		Write-Host "Installing Chocolatey GUI"
-		Write-Host "`n"
-		#choco install -y chocolateygui
-	}
-	1{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing Chocolatey"
-		Write-Host "`n"
-		#iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
-	}
-	2{
-		Write-Host "`n"
-		Write-Host "Skipping"
-	}
-}
-Write-Host "`n"
-pause
-
-clear
-Write-Host "`n"
-Write-Host "Install ccleaner?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Yes','&No')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing ccleaner"
-		Write-Host "`n"
-		#choco install -y ccleaner
-	}
-	1{
-		Write-Host "`n"
-		Write-Host "Skipping"
+Make-Page @{
+	"text"="Install both Chocolatey and the GUI?";
+	"action"={
+		Switch(Prompt-Choice @('Install &Both','&Chocolatey only','&Neither')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing Chocolatey...";
+					"action"={iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))}
+				}
+				DoAndDisplay @{
+					"title"="Installing Chocolatey GUI...";
+					"action"={choco install -y chocolateygui}
+				}
+			}
+			1{
+				DoAndDisplay @{
+					"title"="Installing Chocolatey...";
+					"action"={iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))}
+				}
+			}
+			2{
+				Write-Host "`n"
+				Write-Host "Skipping Chocolatey"
+			}
+		}
 	}
 }
-Write-Host "`n"
-pause
 
-clear
-Write-Host "`n"
-Write-Host "Install defraggler?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Yes','&No')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing defraggler"
-		Write-Host "`n"
-		#choco install -y defraggler
-	}
-	1{
-		Write-Host "`n"
-		Write-Host "Skipping"
+Make-Page @{
+	"text"="Install ccleaner?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing ccleaner...";
+					"action"={choco install -y ccleaner}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping ccleaner"
+			}
+		}
 	}
 }
-Write-Host "`n"
-pause
 
-
-clear
-Write-Host "`n"
-Write-Host "Install vlc?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Yes','&No')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing vlc"
-		Write-Host "`n"
-		#choco install -y vlc
-	}
-	1{
-		Write-Host "`n"
-		Write-Host "Skipping"
+Make-Page @{
+	"text"="Install defraggler?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing defraggler...";
+					"action"={choco install -y defraggler}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping defraggler"
+			}
+		}
 	}
 }
-Write-Host "`n"
-pause
 
-
-clear
-Write-Host "`n"
-Write-Host "Install libreoffice?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Yes','&No')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing libreoffice"
-		Write-Host "`n"
-		#choco install -y libreoffice
-	}
-	1{
-		Write-Host "`n"
-		Write-Host "Skipping"
+Make-Page @{
+	"text"="Install vlc?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing vlc...";
+					"action"={choco install -y vlc}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping vlc"
+			}
+		}
 	}
 }
-Write-Host "`n"
-pause
 
-
-clear
-Write-Host "`n"
-Write-Host "Install sublimetext3?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Yes','&No')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing sublimetext3"
-		Write-Host "`n"
-		#choco install -y sublimetext3
-	}
-	1{
-		Write-Host "`n"
-		Write-Host "Skipping"
+Make-Page @{
+	"text"="Install libreoffice?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing libreoffice...";
+					"action"={choco install -y libreoffice}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping libreoffice"
+			}
+		}
 	}
 }
-Write-Host "`n"
-pause
 
-
-clear
-Write-Host "`n"
-Write-Host "Install geforce-experience?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Yes','&No')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing geforce-experience"
-		Write-Host "`n"
-		#choco install -y geforce-experience
-	}
-	1{
-		Write-Host "`n"
-		Write-Host "Skipping"
+Make-Page @{
+	"text"="Install sublimetext3?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing sublimetext3...";
+					"action"={choco install -y sublimetext3}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping sublimetext3"
+			}
+		}
 	}
 }
-Write-Host "`n"
-pause
 
-
-clear
-Write-Host "`n"
-Write-Host "Install allbrowsers?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Yes','&No')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing allbrowsers"
-		Write-Host "`n"
-		#choco install -y allbrowsers
-	}
-	1{
-		Write-Host "`n"
-		Write-Host "Skipping"
+Make-Page @{
+	"text"="Install geforce-experience?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing geforce-experience...";
+					"action"={choco install -y geforce-experience}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping geforce-experience"
+			}
+		}
 	}
 }
-Write-Host "`n"
-pause
 
-
-clear
-Write-Host "`n"
-Write-Host "Install firefox?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Yes','&No')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing firefox"
-		Write-Host "`n"
-		#choco install -y firefox
-	}
-	1{
-		Write-Host "`n"
-		Write-Host "Skipping"
+Make-Page @{
+	"text"="Install allbrowsers?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing allbrowsers...";
+					"action"={choco install -y allbrowsers}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping allbrowsers"
+			}
+		}
 	}
 }
-Write-Host "`n"
-pause
 
-
-clear
-Write-Host "`n"
-Write-Host "Install google-chrome-x64?"
-Write-Host "`n"
-Switch(Prompt-Choice @('&Yes','&No')){
-	0{
-		clear
-		Write-Host "`n"
-		Write-Host "Installing google-chrome-x64"
-		Write-Host "`n"
-		#choco install -y google-chrome-x64
-	}
-	1{
-		Write-Host "`n"
-		Write-Host "Skipping"
+Make-Page @{
+	"text"="Install firefox?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing firefox...";
+					"action"={choco install -y firefox}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping firefox"
+			}
+		}
 	}
 }
-Write-Host "`n"
-pause
+
+Make-Page @{
+	"text"="Install google-chrome-x64?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing google-chrome-x64...";
+					"action"={choco install -y google-chrome-x64}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping google-chrome-x64"
+			}
+		}
+	}
+}
+
+
 
 
 
@@ -277,10 +286,6 @@ Write-Host "`n"
 # }
 # 
 
-clear
-Write-Host "wizzard complete"
-pause
-
 
 ################## ADD LATER
 # choco install -y tightvnc sandboxie geforce-experience ccleaner defraggler vlc itunes libreoffice blender sysinternals procexp procmon
@@ -291,3 +296,12 @@ pause
 # :: choco install -y phantomjs
 # :: didnt work
 # :: avirafreeantivirus glasswire steam skype 7zip winrar handbrake
+
+
+
+
+clear
+Write-Host "`n"
+Write-Host "wizzard complete"
+Write-Host "`n"
+pause
