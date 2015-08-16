@@ -43,7 +43,7 @@ function Make-Page([array]$options){
 ################################################################################################################################
 
 Make-Page @{
-	"text"="Intro text`n`nread the README.md for a full description`nPotentially harmfull script`nthis script can make perminant changes to your system`nuse CTRL+C to exit the wizzard at any time...`nselection is case insensative`n`nContinue the script?";
+	"text"="Intro text`n`nread the README.md for a full description`nPotentially harmfull script`nthis script can make perminant changes to your system`nuse CTRL+C to exit the wizard at any time...`nselection is case insensative`n`nContinue the script?";
 	"action"={
 		Switch(Prompt-Choice @('&Yes','&No')){
 			0{

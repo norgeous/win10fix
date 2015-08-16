@@ -4,7 +4,7 @@
 
 Semi-automate procedure that need to be done to a clean install of Windows 10
 
-# Wizzard Features (eventually)
+# Wizard Features (eventually)
 * Chocolatey
 * Remove Windows Crapware (3d, bing, communi, people, phone, zune, xbox, onenote, MicrosoftOfficeHub, WindowsMaps)
 * Remove all traces of Microsoft OneDrive
