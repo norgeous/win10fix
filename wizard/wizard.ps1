@@ -15,7 +15,7 @@ read the README.md for a full description`n`
 Potentially harmfull script`n`
 this script can make perminant changes to your system`n`
 use CTRL+C to exit the wizard at any time...`n`
-selection is case insensative`n`
+selection is NOT case-sensative`n`
 `n`
 Continue the script?`
 ";
