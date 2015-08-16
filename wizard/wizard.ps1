@@ -3,9 +3,6 @@ Write-Host "Loading..."
 . "$PSScriptRoot\check_admin.ps1"
 . "$PSScriptRoot\display_functions.ps1"
 
-$do_choco = $False
-$do_crapware = $False
-$do_folders = $False
 
 Make-Page @{
 	"text"="`
@@ -28,15 +25,23 @@ Continue the script?`
 			}
 			1{
 				$do_choco = $True
+				$do_crapware = $False
+				$do_folders = $False
 			}
 			2{
+				$do_choco = $False
 				$do_crapware = $True
+				$do_folders = $False
 			}
 			3{
+				$do_choco = $False
+				$do_crapware = $False
 				$do_folders = $True
 			}
 			4{
-				#exit
+				$do_choco = $False
+				$do_crapware = $False
+				$do_folders = $False
 			}
 		}
 	}
