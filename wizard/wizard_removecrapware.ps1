@@ -1,20 +1,20 @@
-Make-Page @{
-	"text"="Install google-chrome-x64?";
-	"action"={
-		Switch(Prompt-Choice @('&Yes','&No')){
-			0{
-				DoAndDisplay @{
-					"title"="Installing google-chrome-x64...";
-					"action"={choco install -y google-chrome-x64}
-				}
-			}
-			1{
-				Write-Host "`n"
-				Write-Host "Skipping google-chrome-x64"
-			}
-		}
-	}
-}
+#Make-Page @{
+#	"text"="Install google-chrome-x64?";
+#	"action"={
+#		Switch(Prompt-Choice @('&Yes','&No')){
+#			0{
+#				DoAndDisplay @{
+#					"title"="Installing google-chrome-x64...";
+#					"action"={choco install -y google-chrome-x64}
+#				}
+#			}
+#			1{
+#				Write-Host "`n"
+#				Write-Host "Skipping google-chrome-x64"
+#			}
+#		}
+#	}
+#}
 
 
 
