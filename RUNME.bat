@@ -1,4 +1,4 @@
 @ECHO OFF
-SET ThisScriptsDirectory=%~dp0
-SET PowerShellScriptPath=%ThisScriptsDirectory%wizard\wizard.ps1
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%PowerShellScriptPath%""' -Verb RunAs}";
+SET dirpath=%~dp0
+SET ps1script=%dirpath%wizard\wizard.ps1
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%ps1script%""' -Verb RunAs}";
