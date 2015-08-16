@@ -3,6 +3,10 @@ Write-Host "Loading..."
 . "$PSScriptRoot\check_admin.ps1"
 . "$PSScriptRoot\display_functions.ps1"
 
+$do_choco = $False
+$do_crapware = $False
+$do_folders = $False
+
 Make-Page @{
 	"text"="`
 Intro text and title`n`
@@ -16,25 +20,31 @@ selection is case insensative`n`
 Continue the script?`
 ";
 	"action"={
-		Switch(Prompt-Choice @('&Yes','&No')){
+		Switch(Prompt-Choice @('&Everything','&Chocolatey only','&Remove crapware only','&Folders only','&Exit')){
 			0{
-				Write-Host "`n"
-				Write-Host "The script will now continue..."
-				Write-Host "`n"
-				Write-Host "Please read the options for each page carefully!"
+				$do_choco = $True
+				$do_crapware = $True
+				$do_folders = $True
 			}
 			1{
-				Write-Host "EXIT HERE"
-				Break
-				Exit
-				#how?
+				$do_choco = $True
+			}
+			2{
+				$do_crapware = $True
+			}
+			3{
+				$do_folders = $True
+			}
+			4{
+				#exit
 			}
 		}
 	}
 }
 
-. "$PSScriptRoot\wizard_chocolatey.ps1"
-. "$PSScriptRoot\wizard_removecrapware.ps1"
+If($do_choco -eq $True)		{. "$PSScriptRoot\wizard_chocolatey.ps1"}
+If($do_crapware -eq $True)	{. "$PSScriptRoot\wizard_removecrapware.ps1"}
+#If($do_folders -eq $True)	{. "$PSScriptRoot\wizard_folders.ps1"}
 
 Make-Page @{
 	"text"="Wizard complete!`n`nPress Enter to Exit...";
