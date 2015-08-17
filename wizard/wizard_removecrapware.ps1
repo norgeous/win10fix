@@ -44,7 +44,6 @@
 # 	if(Prompt-YesNo "remove communi package(s)" '&yes' '&no')				{Get-AppxPackage *communi* | Remove-AppxPackage;pause} else {pause}
 # 	if(Prompt-YesNo "remove people package(s)" '&yes' '&no')				{Get-AppxPackage *people* | Remove-AppxPackage;pause} else {pause}
 # 	if(Prompt-YesNo "remove phone package(s)" '&yes' '&no')					{Get-AppxPackage *phone* | Remove-AppxPackage;pause} else {pause}
-Write-Host "`n"
 # 	if(Prompt-YesNo "remove zune package(s)" '&yes' '&no')					{Get-AppxPackage *zune* | Remove-AppxPackage;pause} else {pause}
 # 	if(Prompt-YesNo "remove xbox package(s)" '&yes' '&no')					{Get-AppxPackage *xbox* | Remove-AppxPackage;pause} else {pause}
 # 	if(Prompt-YesNo "remove onenote package(s)" '&yes' '&no')				{Get-AppxPackage *onenote* | Remove-AppxPackage;pause} else {pause}

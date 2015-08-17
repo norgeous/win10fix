@@ -1,26 +1,35 @@
 Make-Page @{
-	"text"="Install both Chocolatey and the GUI?";
+	"text"="Install Chocolatey?";
 	"action"={
-		Switch(Prompt-Choice @('Install &Both','&Chocolatey only','&Neither')){
+		Switch(Prompt-Choice @('&Yes','&No')){
 			0{
 				DoAndDisplay @{
 					"title"="Installing Chocolatey...";
 					"action"={iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))}
 				}
+
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping Chocolatey"
+			}
+		}
+	}
+}
+
+Make-Page @{
+	"text"="Install Chocolatey GUI?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&No')){
+			0{
 				DoAndDisplay @{
 					"title"="Installing Chocolatey GUI...";
 					"action"={choco install -y chocolateygui}
 				}
 			}
 			1{
-				DoAndDisplay @{
-					"title"="Installing Chocolatey...";
-					"action"={iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))}
-				}
-			}
-			2{
 				Write-Host "`n"
-				Write-Host "Skipping Chocolatey"
+				Write-Host "Skipping Chocolatey GUI"
 			}
 		}
 	}
