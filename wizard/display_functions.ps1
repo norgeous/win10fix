@@ -17,7 +17,7 @@ function Prompt-Choice([array]$options){
 }
 
 function Make-Page([array]$options){
-	clear
+	#clear
 	Write-Host "`n"
 	#Write-Host "************************************************************************"
 	#Write-Host "`n"
@@ -26,7 +26,7 @@ function Make-Page([array]$options){
 	#Write-Host "************************************************************************"
 	#Write-Host "`n"
 	& $options.action
-	Write-Host "`n"
-	pause
+	#Write-Host "`n"
+	#pause
 
 }

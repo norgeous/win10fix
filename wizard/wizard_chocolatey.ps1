@@ -36,6 +36,65 @@ Make-Page @{
 }
 
 Make-Page @{
+	"text"="Install all packages?";
+	"action"={
+		Switch(Prompt-Choice @('&Yes','&Choose','&No')){
+			0{
+				DoAndDisplay @{
+					"title"="Installing all packages...";
+					"action"={
+						choco install -y ccleaner defraggler
+					}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Choose packages one-by-one..."
+				Make-Page @{
+					"text"="Install ccleaner?";
+					"action"={
+						Switch(Prompt-Choice @('&Yes','&No')){
+							0{
+								DoAndDisplay @{
+									"title"="Installing ccleaner...";
+									"action"={choco install -y ccleaner}
+								}
+							}
+							1{
+								Write-Host "`n"
+								Write-Host "Skipping ccleaner"
+							}
+						}
+					}
+				}
+
+				Make-Page @{
+					"text"="Install defraggler?";
+					"action"={
+						Switch(Prompt-Choice @('&Yes','&No')){
+							0{
+								DoAndDisplay @{
+									"title"="Installing defraggler...";
+									"action"={choco install -y defraggler}
+								}
+							}
+							1{
+								Write-Host "`n"
+								Write-Host "Skipping defraggler"
+							}
+						}
+					}
+				}
+			}
+			1{
+				Write-Host "`n"
+				Write-Host "Skipping packages"
+			}
+		}
+	}
+}
+
+Make-Page @{
 	"text"="Install ccleaner?";
 	"action"={
 		Switch(Prompt-Choice @('&Yes','&No')){
