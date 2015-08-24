@@ -44,5 +44,5 @@ Continue the script?`
 
 Make-Page @{
 	"text"="Wizard complete!`n`nPress Enter to Exit...";
-	"action"={}
+	"action"={pause}
 }
