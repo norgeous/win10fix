@@ -27,3 +27,4 @@ Semi-automate procedure that need to be done to a clean install of Windows 10
 * http://www.howtogeek.com/224798/how-to-uninstall-windows-10s-built-in-apps-and-how-to-reinstall-them/
 * http://www.tenforums.com/software-apps/14445-uninstall-bloatware-windows-10-came.html#post328477
 * http://www.sevenforums.com/tutorials/741-taskbar-use-small-large-icons.html
+* http://www.sevenforums.com/tutorials/293-notification-area-icons-hide-show-system-icons-notifications.html
