@@ -29,14 +29,17 @@ Make-Page @{
 
 						Make-Page @{
 							"text"="Install these packages?`n`
+* 7zip`n`
+* winrar`n`
 * ccleaner`n`
 * defraggler`n`
 * vlc`n`
 * libreoffice`n`
 * sublimetext3`n`
 * irfanview`n`
-* itunes`n`
 * autohotkey`n`
+* itunes`n`
+* skype`n`
 							";
 							"action"={
 								Switch(Prompt-Choice @('&Yes','&Choose','&No')){
@@ -44,13 +47,50 @@ Make-Page @{
 										DoAndDisplay @{
 											"title"="Installing all packages...";
 											"action"={
-												choco install -y ccleaner defraggler vlc libreoffice sublimetext3 irfanview itunes autohotkey
+												choco install -y 7zip winrar ccleaner defraggler vlc libreoffice sublimetext3 irfanviewautohotkey  itunes skype
 											}
 										}
 									}
 									1{
 										Write-Host "`n"
 										Write-Host "Choose packages one-by-one..."
+										Write-Host "`n"
+										Make-Page @{
+											"text"="Install 7zip?";
+											"action"={
+												Switch(Prompt-Choice @('&Yes','&No')){
+													0{
+														DoAndDisplay @{
+															"title"="Installing 7zip...";
+															"action"={choco install -y 7zip}
+														}
+													}
+													1{
+														Write-Host "`n"
+														Write-Host "Skipping 7zip"
+													}
+												}
+											}
+										}
+
+										Make-Page @{
+											"text"="Install winrar?";
+											"action"={
+												Switch(Prompt-Choice @('&Yes','&No')){
+													0{
+														DoAndDisplay @{
+															"title"="Installing winrar...";
+															"action"={choco install -y winrar}
+														}
+													}
+													1{
+														Write-Host "`n"
+														Write-Host "Skipping winrar"
+													}
+												}
+											}
+										}
+
 										Make-Page @{
 											"text"="Install ccleaner?";
 											"action"={
@@ -160,6 +200,24 @@ Make-Page @{
 										}
 
 										Make-Page @{
+											"text"="Install autohotkey?";
+											"action"={
+												Switch(Prompt-Choice @('&Yes','&No')){
+													0{
+														DoAndDisplay @{
+															"title"="Installing autohotkey...";
+															"action"={choco install -y autohotkey}
+														}
+													}
+													1{
+														Write-Host "`n"
+														Write-Host "Skipping autohotkey"
+													}
+												}
+											}
+										}
+
+										Make-Page @{
 											"text"="Install itunes?";
 											"action"={
 												Switch(Prompt-Choice @('&Yes','&No')){
@@ -178,18 +236,18 @@ Make-Page @{
 										}
 
 										Make-Page @{
-											"text"="Install autohotkey?";
+											"text"="Install skype?";
 											"action"={
 												Switch(Prompt-Choice @('&Yes','&No')){
 													0{
 														DoAndDisplay @{
-															"title"="Installing autohotkey...";
-															"action"={choco install -y autohotkey}
+															"title"="Installing skype...";
+															"action"={choco install -y skype}
 														}
 													}
 													1{
 														Write-Host "`n"
-														Write-Host "Skipping autohotkey"
+														Write-Host "Skipping skype"
 													}
 												}
 											}
@@ -198,6 +256,7 @@ Make-Page @{
 									2{
 										Write-Host "`n"
 										Write-Host "Skipping packages"
+										Write-Host "`n"
 									}
 								}
 							}
@@ -271,6 +330,7 @@ Make-Page @{
 									2{
 										Write-Host "`n"
 										Write-Host "Skipping allbrowsers"
+										Write-Host "`n"
 									}
 								}
 							}
@@ -289,6 +349,26 @@ Make-Page @{
 									1{
 										Write-Host "`n"
 										Write-Host "Skipping geforce-experience"
+										Write-Host "`n"
+									}
+								}
+							}
+						}
+
+						Make-Page @{
+							"text"="Install tightvnc blender sysinternals procexp procmon filezilla nodejs putty git github virtualbox grepwin?";
+							"action"={
+								Switch(Prompt-Choice @('&Yes','&No')){
+									0{
+										DoAndDisplay @{
+											"title"="Installing tightvnc blender sysinternals procexp procmon filezilla nodejs putty git github virtualbox grepwin...";
+											"action"={choco install -y tightvnc blender sysinternals procexp procmon filezilla nodejs putty git github virtualbox grepwin}
+										}
+									}
+									1{
+										Write-Host "`n"
+										Write-Host "Skipping tightvnc blender sysinternals procexp procmon filezilla nodejs putty git github virtualbox grepwin"
+										Write-Host "`n"
 									}
 								}
 							}
@@ -299,13 +379,11 @@ Make-Page @{
 			1{
 				Write-Host "`n"
 				Write-Host "Skipping Chocolatey"
+				Write-Host "`n"
 			}
 		}
 	}
 }
 
-
-################## ADD LATER
-# choco install -y tightvnc blender sysinternals procexp procmon filezilla nodejs putty git github virtualbox grepwin
-
-# :: avirafreeantivirus glasswire steam skype 7zip winrar handbrake
+# do not work:
+# choco install -y avirafreeantivirus glasswire steam handbrake
