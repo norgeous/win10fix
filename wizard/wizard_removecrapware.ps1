@@ -1,14 +1,29 @@
 Make-Page @{
-	"text"="Remove Windows Crapware (3d, bing, candycrush, people, phone, photo, zune, xbox, onenote, twitter, SkypeApp, MicrosoftSolitaireCollection, MicrosoftOfficeHub, CloudExperienceHost, windowscommunicationsapps, WindowsMaps)?";
+	"text"="Remove Windows Crapware?`n`n`
+* 3DBuilder`n`
+* Appconnector`n`
+* Bing`n`
+* candycrush`n`
+* people`n`
+* phone`n`
+* photo`n`
+* zune`n`
+* xbox`n`
+* onenote`n`
+* twitter`n`
+* SkypeApp`n`
+* MicrosoftSolitaireCollection`n`
+* MicrosoftOfficeHub`n`
+* CloudExperienceHost`n`
+* windowscommunicationsapps`n`
+* WindowsMaps`n`
+";
 	"action"={
-		Switch(Prompt-Choice @('&All','&Choose','&No')){
+		Switch(Prompt-Choice @('&Remove All','&Keep All')){
 			0{
 				DoAndDisplay @{
 					"title"="Removing all Crapware...";
 					"action"={
-
-						Get-AppxPackage *candycrush* | Remove-AppxPackage
-						Get-AppxPackage *twitter* | Remove-AppxPackage
 
 						Get-AppxPackage *3DBuilder* | Remove-AppxPackage
 						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:Microsoft.3DBuilder_2015.720.2336.0_neutral_~_8wekyb3d8bbwe
@@ -39,6 +54,12 @@ Make-Page @{
 						
 						Get-AppxPackage *SkypeApp* | Remove-AppxPackage
 						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:Microsoft.SkypeApp_3.2.1.0_neutral_~_kzf8qxf38zg5c
+
+						#VCLibs, part of Skype?
+						Get-AppxPackage *VCLibs* | Remove-AppxPackage
+						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:Microsoft.VCLibs.140.00_14.0.22929.0_x86__8wekyb3d8bbwe
+						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:Microsoft.VCLibs.140.00_14.0.22929.0_x64__8wekyb3d8bbwe
+						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:Microsoft.VCLibs.110.00_11.0.51106.1_x86__8wekyb3d8bbwe
 						
 						Get-AppxPackage *Windows.Photos* | Remove-AppxPackage
 						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:Microsoft.Windows.Photos_2015.618.1921.0_neutral_~_8wekyb3d8bbwe
@@ -46,7 +67,8 @@ Make-Page @{
 						Get-AppxPackage *WindowsCamera* | Remove-AppxPackage
 						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:Microsoft.WindowsCamera_2015.612.1501.0_neutral_~_8wekyb3d8bbwe
 						
-						Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage #Mail/Calendar
+						#Mail/Calendar
+						Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage
 						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:microsoft.windowscommunicationsapps_2015.6002.42251.0_neutral_~_8wekyb3d8bbwe
 						
 						Get-AppxPackage *WindowsMaps* | Remove-AppxPackage
@@ -68,24 +90,19 @@ Make-Page @{
 						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:Microsoft.ZuneMusic_2019.6.10841.0_neutral_~_8wekyb3d8bbwe
 						DISM /Online /Remove-ProvisionedAppxPackage /PackageName:Microsoft.ZuneVideo_2019.6.10811.0_neutral_~_8wekyb3d8bbwe
 
-						
-						Get-AppxPackage | Select Name, PackageFullName
-						DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
+						Get-AppxPackage *candycrush* | Remove-AppxPackage
+						Get-AppxPackage *twitter* | Remove-AppxPackage
 
-						pause
+						#Get-AppxPackage | Select Name, PackageFullName
+						#DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
+						#pause
 
 					}
 				}
 			}
 			1{
 				Write-Host "`n"
-				Write-Host "Choose..."
-				Write-Host "UNIMPLIMENTED"
-				pause
-			}
-			2{
-				Write-Host "`n"
-				Write-Host "Skipping Crapware"
+				Write-Host "Skipping Crapware removal"
 			}
 		}
 	}
