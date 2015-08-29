@@ -1,5 +1,5 @@
 Make-Page @{
-	"text"="Remove Windows Crapware (3d, bing, communi, people, phone, zune, xbox, onenote, MicrosoftOfficeHub, WindowsMaps)?";
+	"text"="Remove Windows Crapware (3d, bing, candycrush, people, phone, photo, zune, xbox, onenote, twitter, SkypeApp, MicrosoftSolitaireCollection, MicrosoftOfficeHub, CloudExperienceHost, windowscommunicationsapps, WindowsMaps)?";
 	"action"={
 		Switch(Prompt-Choice @('&All','&Choose','&No')){
 			0{
@@ -28,6 +28,8 @@ Make-Page @{
 			1{
 				Write-Host "`n"
 				Write-Host "Choose..."
+				Write-Host "UNIMPLIMENTED"
+				pause
 			}
 			2{
 				Write-Host "`n"

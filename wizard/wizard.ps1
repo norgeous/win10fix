@@ -3,10 +3,6 @@ Write-Host "Loading..."
 . "$PSScriptRoot\check_admin.ps1"
 . "$PSScriptRoot\display_functions.ps1"
 
-				$do_choco = $FALSE
-				$do_crapware = $FALSE
-				$do_folders = $FALSE
-
 Make-Page @{
 	"text"="`
 Intro text and title`n`
