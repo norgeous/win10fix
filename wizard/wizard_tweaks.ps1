@@ -6,12 +6,12 @@ Make-Page @{
 				DoAndDisplay @{
 					"title"="tweak1...";
 					"action"={
+						
 					}
 				}
 			}
 			1{
-				Write-Host "`n"
-				Write-Host "Skipping tweak1"
+				Write-Host "`nSkipping tweak1`n"
 			}
 		}
 	}

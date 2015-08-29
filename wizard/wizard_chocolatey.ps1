@@ -20,8 +20,7 @@ Make-Page @{
 										}
 									}
 									1{
-										Write-Host "`n"
-										Write-Host "Skipping chocolateygui"
+										Write-Host "`nSkipping chocolateygui`n"
 									}
 								}
 							}
@@ -52,9 +51,7 @@ Make-Page @{
 										}
 									}
 									1{
-										Write-Host "`n"
-										Write-Host "Choose packages one-by-one..."
-										Write-Host "`n"
+										Write-Host "`nChoose packages one-by-one...`n"
 										Make-Page @{
 											"text"="Install 7zip?";
 											"action"={
@@ -66,8 +63,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping 7zip"
+														Write-Host "`nSkipping 7zip`n"
 													}
 												}
 											}
@@ -84,8 +80,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping winrar"
+														Write-Host "`nSkipping winrar`n"
 													}
 												}
 											}
@@ -102,8 +97,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping ccleaner"
+														Write-Host "`nSkipping ccleaner`n"
 													}
 												}
 											}
@@ -120,8 +114,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping defraggler"
+														Write-Host "`nSkipping defraggler`n"
 													}
 												}
 											}
@@ -138,8 +131,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping vlc"
+														Write-Host "`nSkipping vlc`n"
 													}
 												}
 											}
@@ -156,8 +148,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping libreoffice"
+														Write-Host "`nSkipping libreoffice`n"
 													}
 												}
 											}
@@ -174,8 +165,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping sublimetext3"
+														Write-Host "`nSkipping sublimetext3`n"
 													}
 												}
 											}
@@ -192,8 +182,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping irfanview"
+														Write-Host "`nSkipping irfanview`n"
 													}
 												}
 											}
@@ -210,8 +199,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping autohotkey"
+														Write-Host "`nSkipping autohotkey`n"
 													}
 												}
 											}
@@ -228,8 +216,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping itunes"
+														Write-Host "`nSkipping itunes`n"
 													}
 												}
 											}
@@ -246,17 +233,14 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping skype"
+														Write-Host "`nSkipping skype`n"
 													}
 												}
 											}
 										}
 									}
 									2{
-										Write-Host "`n"
-										Write-Host "Skipping packages"
-										Write-Host "`n"
+										Write-Host "`nSkipping packages`n"
 									}
 								}
 							}
@@ -284,8 +268,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping firefox"
+														Write-Host "`nSkipping firefox`n"
 													}
 												}
 											}
@@ -302,8 +285,7 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping google-chrome-x64"
+														Write-Host "`nSkipping google-chrome-x64`n"
 													}
 												}
 											}
@@ -320,17 +302,14 @@ Make-Page @{
 														}
 													}
 													1{
-														Write-Host "`n"
-														Write-Host "Skipping opera"
+														Write-Host "`nSkipping opera`n"
 													}
 												}
 											}
 										}
 									}
 									2{
-										Write-Host "`n"
-										Write-Host "Skipping allbrowsers"
-										Write-Host "`n"
+										Write-Host "`nSkipping all browsers`n"
 									}
 								}
 							}
@@ -347,9 +326,7 @@ Make-Page @{
 										}
 									}
 									1{
-										Write-Host "`n"
-										Write-Host "Skipping geforce-experience"
-										Write-Host "`n"
+										Write-Host "`nSkipping geforce-experience`n"
 									}
 								}
 							}
@@ -366,9 +343,7 @@ Make-Page @{
 										}
 									}
 									1{
-										Write-Host "`n"
-										Write-Host "Skipping tightvnc blender sysinternals procexp procmon filezilla nodejs putty git github virtualbox grepwin"
-										Write-Host "`n"
+										Write-Host "`nSkipping tightvnc blender sysinternals procexp procmon filezilla nodejs putty git github virtualbox grepwin`n"
 									}
 								}
 							}
@@ -377,9 +352,7 @@ Make-Page @{
 				}
 			}
 			1{
-				Write-Host "`n"
-				Write-Host "Skipping Chocolatey"
-				Write-Host "`n"
+				Write-Host "`nSkipping Chocolatey`n"
 			}
 		}
 	}

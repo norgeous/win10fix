@@ -82,8 +82,7 @@ Make-Page @{
 				}
 			}
 			1{
-				Write-Host "`n"
-				Write-Host "Skipping Crapware removal"
+				Write-Host "`nSkipping Crapware removal`n"
 			}
 		}
 	}
