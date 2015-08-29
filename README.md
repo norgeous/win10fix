@@ -23,3 +23,4 @@ Semi-automate procedure that need to be done to a clean install of Windows 10
 * https://gist.github.com/uruloki/c9f7ffccd80b4def9eb7
 * https://gist.github.com/kgoutsos/4f9516ee0630cd0909b9
 * https://github.com/search?utf8=%E2%9C%93&q=win+10
+* https://www.maketecheasier.com/enable-dark-mode-windows/

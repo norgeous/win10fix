@@ -35,7 +35,7 @@ Make-Page @{
 										DoAndDisplay @{
 											"title"="Installing all packages...";
 											"action"={
-												choco install -y ccleaner defraggler vlc libreoffice sublimetext3
+												choco install -y ccleaner defraggler vlc libreoffice sublimetext3 irfanview
 											}
 										}
 									}
@@ -127,6 +127,24 @@ Make-Page @{
 													1{
 														Write-Host "`n"
 														Write-Host "Skipping sublimetext3"
+													}
+												}
+											}
+										}
+
+										Make-Page @{
+											"text"="Install irfanview?";
+											"action"={
+												Switch(Prompt-Choice @('&Yes','&No')){
+													0{
+														DoAndDisplay @{
+															"title"="Installing irfanview...";
+															"action"={choco install -y irfanview}
+														}
+													}
+													1{
+														Write-Host "`n"
+														Write-Host "Skipping irfanview"
 													}
 												}
 											}

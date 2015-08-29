@@ -21,11 +21,11 @@ Chocolatey aids the install of: ccleaner, defraggler, vlc, libreoffice, sublimet
 Continue the script?`
 ";
 	"action"={
-		Switch(Prompt-Choice @('&Everything','&Chocolatey only','&Remove crapware only','&Folders only','&Exit')){
+		Switch(Prompt-Choice @('&Everything','&Chocolatey only','&Remove crapware only','&Tweaks only','&Exit')){
 			0{
 				. "$PSScriptRoot\wizard_chocolatey.ps1"
 				. "$PSScriptRoot\wizard_removecrapware.ps1"
-				. "$PSScriptRoot\wizard_folders.ps1"
+				. "$PSScriptRoot\wizard_tweaks.ps1"
 			}
 			1{
 				. "$PSScriptRoot\wizard_chocolatey.ps1"
@@ -34,7 +34,7 @@ Continue the script?`
 				. "$PSScriptRoot\wizard_removecrapware.ps1"
 			}
 			3{
-				. "$PSScriptRoot\wizard_folders.ps1"
+				. "$PSScriptRoot\wizard_tweaks.ps1"
 			}
 			4{
 			}
