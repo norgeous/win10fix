@@ -28,14 +28,23 @@ Make-Page @{
 						}
 
 						Make-Page @{
-							"text"="Install all packages?";
+							"text"="Install these packages?`n`
+* ccleaner`n`
+* defraggler`n`
+* vlc`n`
+* libreoffice`n`
+* sublimetext3`n`
+* irfanview`n`
+* itunes`n`
+* autohotkey`n`
+							";
 							"action"={
 								Switch(Prompt-Choice @('&Yes','&Choose','&No')){
 									0{
 										DoAndDisplay @{
 											"title"="Installing all packages...";
 											"action"={
-												choco install -y ccleaner defraggler vlc libreoffice sublimetext3 irfanview
+												choco install -y ccleaner defraggler vlc libreoffice sublimetext3 irfanview itunes autohotkey
 											}
 										}
 									}
@@ -145,6 +154,42 @@ Make-Page @{
 													1{
 														Write-Host "`n"
 														Write-Host "Skipping irfanview"
+													}
+												}
+											}
+										}
+
+										Make-Page @{
+											"text"="Install itunes?";
+											"action"={
+												Switch(Prompt-Choice @('&Yes','&No')){
+													0{
+														DoAndDisplay @{
+															"title"="Installing itunes...";
+															"action"={choco install -y itunes}
+														}
+													}
+													1{
+														Write-Host "`n"
+														Write-Host "Skipping itunes"
+													}
+												}
+											}
+										}
+
+										Make-Page @{
+											"text"="Install autohotkey?";
+											"action"={
+												Switch(Prompt-Choice @('&Yes','&No')){
+													0{
+														DoAndDisplay @{
+															"title"="Installing autohotkey...";
+															"action"={choco install -y autohotkey}
+														}
+													}
+													1{
+														Write-Host "`n"
+														Write-Host "Skipping autohotkey"
 													}
 												}
 											}
@@ -261,11 +306,6 @@ Make-Page @{
 
 
 ################## ADD LATER
-# choco install -y tightvnc sandboxie geforce-experience ccleaner defraggler vlc itunes libreoffice blender sysinternals procexp procmon
-# choco install -y allbrowsers sublimetext3 filezilla nodejs putty github virtualbox autohotkey grepwin
-# choco install -y adb
-# :: choco install -y jdk7 android-sdk
-# :: choco install -y kodi
-# :: choco install -y phantomjs
-# :: didnt work
+# choco install -y tightvnc blender sysinternals procexp procmon filezilla nodejs putty git github virtualbox grepwin
+
 # :: avirafreeantivirus glasswire steam skype 7zip winrar handbrake
