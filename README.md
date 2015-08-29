@@ -24,3 +24,5 @@ Semi-automate procedure that need to be done to a clean install of Windows 10
 * https://gist.github.com/kgoutsos/4f9516ee0630cd0909b9
 * https://github.com/search?utf8=%E2%9C%93&q=win+10
 * https://www.maketecheasier.com/enable-dark-mode-windows/
+* http://www.howtogeek.com/224798/how-to-uninstall-windows-10s-built-in-apps-and-how-to-reinstall-them/
+* http://www.tenforums.com/software-apps/14445-uninstall-bloatware-windows-10-came.html#post328477

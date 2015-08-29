@@ -1,17 +1,17 @@
 Make-Page @{
-	"text"="Tweak 1?";
+	"text"="tweak1?";
 	"action"={
 		Switch(Prompt-Choice @('&Yes','&No')){
 			0{
 				DoAndDisplay @{
-					"title"="Removing all Crapware...";
+					"title"="tweak1...";
 					"action"={
 					}
 				}
 			}
-			2{
+			1{
 				Write-Host "`n"
-				Write-Host "Skipping Crapware"
+				Write-Host "Skipping tweak1"
 			}
 		}
 	}
