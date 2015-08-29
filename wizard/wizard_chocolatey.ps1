@@ -39,14 +39,17 @@ Make-Page @{
 * autohotkey`n`
 * itunes`n`
 * skype`n`
+* firefox`n`
+* google-chrome-x64`n`
+* opera`n`
 							";
 							"action"={
 								Switch(Prompt-Choice @('&Yes','&Choose','&No')){
 									0{
 										DoAndDisplay @{
-											"title"="Installing all packages...";
+											"title"="Installing packages...";
 											"action"={
-												choco install -y 7zip winrar ccleaner defraggler vlc libreoffice sublimetext3 irfanviewautohotkey  itunes skype
+												choco install -y 7zip winrar ccleaner defraggler vlc libreoffice sublimetext3 irfanviewautohotkey itunes skype firefox google-chrome-x64 opera
 											}
 										}
 									}
@@ -238,78 +241,80 @@ Make-Page @{
 												}
 											}
 										}
+
+										Make-Page @{
+											"text"="Install all browsers? (firefox, google-chrome-x64, opera)";
+											"action"={
+												Switch(Prompt-Choice @('&Yes','&Choose','&No')){
+													0{
+														DoAndDisplay @{
+															"title"="Installing all browsers...";
+															"action"={choco install -y firefox google-chrome-x64 opera}
+														}
+													}
+													1{
+														Make-Page @{
+															"text"="Install firefox?";
+															"action"={
+																Switch(Prompt-Choice @('&Yes','&No')){
+																	0{
+																		DoAndDisplay @{
+																			"title"="Installing firefox...";
+																			"action"={choco install -y firefox}
+																		}
+																	}
+																	1{
+																		Write-Host "`nSkipping firefox`n"
+																	}
+																}
+															}
+														}
+
+														Make-Page @{
+															"text"="Install google-chrome-x64?";
+															"action"={
+																Switch(Prompt-Choice @('&Yes','&No')){
+																	0{
+																		DoAndDisplay @{
+																			"title"="Installing google-chrome-x64...";
+																			"action"={choco install -y google-chrome-x64}
+																		}
+																	}
+																	1{
+																		Write-Host "`nSkipping google-chrome-x64`n"
+																	}
+																}
+															}
+														}
+
+														Make-Page @{
+															"text"="Install opera?";
+															"action"={
+																Switch(Prompt-Choice @('&Yes','&No')){
+																	0{
+																		DoAndDisplay @{
+																			"title"="Installing opera...";
+																			"action"={choco install -y opera}
+																		}
+																	}
+																	1{
+																		Write-Host "`nSkipping opera`n"
+																	}
+																}
+															}
+														}
+													}
+													2{
+														Write-Host "`nSkipping all browsers`n"
+													}
+												}
+											}
+										}
+
+
 									}
 									2{
 										Write-Host "`nSkipping packages`n"
-									}
-								}
-							}
-						}
-
-						Make-Page @{
-							"text"="Install browsers? (firefox, google-chrome-x64, opera)";
-							"action"={
-								Switch(Prompt-Choice @('&Yes','&Choose','&No')){
-									0{
-										DoAndDisplay @{
-											"title"="Installing all browsers...";
-											"action"={choco install -y firefox google-chrome-x64 opera}
-										}
-									}
-									1{
-										Make-Page @{
-											"text"="Install firefox?";
-											"action"={
-												Switch(Prompt-Choice @('&Yes','&No')){
-													0{
-														DoAndDisplay @{
-															"title"="Installing firefox...";
-															"action"={choco install -y firefox}
-														}
-													}
-													1{
-														Write-Host "`nSkipping firefox`n"
-													}
-												}
-											}
-										}
-
-										Make-Page @{
-											"text"="Install google-chrome-x64?";
-											"action"={
-												Switch(Prompt-Choice @('&Yes','&No')){
-													0{
-														DoAndDisplay @{
-															"title"="Installing google-chrome-x64...";
-															"action"={choco install -y google-chrome-x64}
-														}
-													}
-													1{
-														Write-Host "`nSkipping google-chrome-x64`n"
-													}
-												}
-											}
-										}
-
-										Make-Page @{
-											"text"="Install opera?";
-											"action"={
-												Switch(Prompt-Choice @('&Yes','&No')){
-													0{
-														DoAndDisplay @{
-															"title"="Installing opera...";
-															"action"={choco install -y opera}
-														}
-													}
-													1{
-														Write-Host "`nSkipping opera`n"
-													}
-												}
-											}
-										}
-									}
-									2{
-										Write-Host "`nSkipping all browsers`n"
 									}
 								}
 							}
@@ -348,6 +353,8 @@ Make-Page @{
 								}
 							}
 						}
+
+						
 					}
 				}
 			}
