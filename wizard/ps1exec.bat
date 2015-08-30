@@ -1,4 +1,5 @@
 @ECHO OFF
+ECHO Becoming Administrator...
 if "%~1"=="" (
 	:: no param supplied, start interactive powershell
 	PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass' -Verb RunAs}";

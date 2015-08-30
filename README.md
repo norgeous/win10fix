@@ -28,3 +28,5 @@ Semi-automate procedure that need to be done to a clean install of Windows 10
 * http://www.tenforums.com/software-apps/14445-uninstall-bloatware-windows-10-came.html#post328477
 * http://www.sevenforums.com/tutorials/741-taskbar-use-small-large-icons.html
 * http://www.sevenforums.com/tutorials/293-notification-area-icons-hide-show-system-icons-notifications.html
+* https://gist.github.com/thoroc/86d354d029dda303598a
+* http://windowsitpro.com/systems-management/how-can-i-modify-registry-enable-option-show-file-extensions-windows-explorer

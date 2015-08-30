@@ -1,7 +1,7 @@
 Write-Host "Loading..."
 
-. "$PSScriptRoot\check_admin.ps1"
-. "$PSScriptRoot\display_functions.ps1"
+. "$PSScriptRoot\lib\check_admin.ps1"
+. "$PSScriptRoot\lib\display_functions.ps1"
 
 Make-Page @{
 	"text"="`
