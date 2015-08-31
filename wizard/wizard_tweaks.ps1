@@ -41,21 +41,46 @@ Make-Page @{
 						# Don't hide icons in tray
 						Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer -Name EnableAutoTray -Type DWord -Value 0
 						
+						# Don't hide file extensions
+						Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name HideFileExt -Type DWord -Value 0
+
+						# Don't hide hidden files
+						Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name Hidden -Type DWord -Value 1
+
 						# Dark Theme for Windows
 						Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize\ -Name AppsUseLightTheme -Type DWord -Value 0
 
 
 
 						# Change Windows Updates to "Notify to schedule restart"
-						Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name UxOption -Type DWord -Value 1
+						#Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name UxOption -Type DWord -Value 1
 
 						# disable P2P windows update downloads completely:
 						Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config -Name DODownloadMode -Type DWord -Value 0
 
 
 
+
+
+						# delete folders from user folder
+						$user = [Environment]::UserName
+						Remove-Item -Recurse -Force "C:\Users\$user\Contacts"
+						Remove-Item -Recurse -Force "C:\Users\$user\Favourites"
+						Remove-Item -Recurse -Force "C:\Users\$user\Music"
+						Remove-Item -Recurse -Force "C:\Users\$user\Pictures"
+						Remove-Item -Recurse -Force "C:\Users\$user\Saved Games"
+						Remove-Item -Recurse -Force "C:\Users\$user\Searches"
+						Remove-Item -Recurse -Force "C:\Users\$user\Videos"
+
+
+
+
+
 						# Kill OneDrive
-						cmd $PSScriptRoot\external\RemoveOneDrive.bat
+						Start-Process "cmd.exe" "/c $PSScriptRoot\external\RemoveOneDrive.bat"
+
+
+
 
 						
 					}
