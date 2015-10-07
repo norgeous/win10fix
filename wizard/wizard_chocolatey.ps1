@@ -34,9 +34,9 @@ Make-Page @{
 * ccleaner`n`
 * defraggler`n`
 * vlc`n`
+* jpegview`n`
 * libreoffice`n`
 * sublimetext3`n`
-* irfanview`n`
 * autohotkey`n`
 * itunes`n`
 * skype`n`
@@ -50,7 +50,7 @@ Make-Page @{
                                         DoAndDisplay @{
                                             "title"="Installing packages...";
                                             "action"={
-                                                choco install -y avirafreeantivirus 7zip winrar ccleaner defraggler vlc libreoffice sublimetext3 irfanviewautohotkey itunes skype firefox google-chrome-x64 opera
+                                                choco install -y avirafreeantivirus 7zip winrar ccleaner defraggler vlc jpegview libreoffice sublimetext3 autohotkey itunes skype firefox google-chrome-x64 opera
                                             }
                                         }
                                     }
@@ -160,6 +160,23 @@ Make-Page @{
                                         }
 
                                         Make-Page @{
+                                            "text"="Install jpegview?";
+                                            "action"={
+                                                Switch(Prompt-Choice @('&Yes','&No')){
+                                                    0{
+                                                        DoAndDisplay @{
+                                                            "title"="Installing jpegview...";
+                                                            "action"={choco install -y jpegview}
+                                                        }
+                                                    }
+                                                    1{
+                                                        Write-Host "`nSkipping jpegview`n"
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        Make-Page @{
                                             "text"="Install libreoffice?";
                                             "action"={
                                                 Switch(Prompt-Choice @('&Yes','&No')){
@@ -188,23 +205,6 @@ Make-Page @{
                                                     }
                                                     1{
                                                         Write-Host "`nSkipping sublimetext3`n"
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        Make-Page @{
-                                            "text"="Install irfanview?";
-                                            "action"={
-                                                Switch(Prompt-Choice @('&Yes','&No')){
-                                                    0{
-                                                        DoAndDisplay @{
-                                                            "title"="Installing irfanview...";
-                                                            "action"={choco install -y irfanview}
-                                                        }
-                                                    }
-                                                    1{
-                                                        Write-Host "`nSkipping irfanview`n"
                                                     }
                                                 }
                                             }
