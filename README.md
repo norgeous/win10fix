@@ -4,14 +4,15 @@
 
 Semi-automate procedure that need to be done to a clean install of Windows 10
 
-# Wizard Features (eventually)
-* Chocolatey
+### Wizard Features (eventually)
+* Chocolatey - avirafreeantivirus, 7zip, winrar, ccleaner, defraggler, vlc, jpegview, libreoffice, sublimetext3, autohotkey, itunes, skype, firefox, google-chrome-x64, opera
+* Chocolatey - avirafreeantivirus, 7zip, winrar, ccleaner, defraggler, vlc, jpegview, libreoffice, sublimetext3, autohotkey, itunes, skype, firefox, google-chrome-x64, opera
 * Remove Windows Crapware (3d, bing, communi, people, phone, zune, xbox, onenote, MicrosoftOfficeHub, WindowsMaps)
 * Remove all traces of Microsoft OneDrive
 * Remove 'Folders' section from 'This PC' (My Computer) in explorer, includes remove from 'libraries' sidebar
 
 
-# Sources
+### Sources
 
 * run .ps1 as admin from .bat
 * http://blog.danskingdom.com/allow-others-to-run-your-powershell-scripts-from-a-batch-file-they-will-love-you-for-it/
