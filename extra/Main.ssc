@@ -11,7 +11,6 @@
 .\\RemoveOneDrive.bat																	#Remove OneDrive
 .\\Crapware.ps1																			#Remove default bloat
 .\\Privacy.ps1																			#Privacy Tweaks
-.\\DeleteUserFolders.ps1																#DeleteUserFolders (CAUTION)
 
 #64bit only ('Start>File Explorer' shows 'This PC' instead of 'Frequent folders' and 'Recent Files', also removes 'Folders' from 'This PC' main view and sidebar)
 .\\FixMyComputer.ps1																	#Fix MyComputer 
