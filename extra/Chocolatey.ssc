@@ -1,9 +1,10 @@
 #Chocolatey
 iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))		#install
-choco install -y chocolateygui																#gui install
 cup all -y																					#update packages
+.\\installupdater.ps1																		#choco updated cupally
 
 #Essential
+choco install -y chocolateygui																#gui install
 choco install -y flashplayerplugin															#flash
 choco install -y 7zip																		#7zip
 choco install -y winrar																		#winrar
@@ -11,7 +12,8 @@ choco install -y ccleaner																	#ccleaner
 choco install -y defraggler																	#defraggler
 choco install -y vlc																		#vlc
 choco install -y jpegview																	#jpegview
-choco install -y flashplayerplugin 7zip winrar ccleaner defraggler vlc jpegview				#all
+choco install -y pdfcreator																	#pdfcreator
+choco install -y flashplayerplugin 7zip winrar ccleaner defraggler vlc jpegview	pdfcreator	#all
 
 #Browser
 choco install -y firefox																	#firefox
@@ -24,8 +26,9 @@ choco install -y libreoffice																#libreoffice
 choco install -y gimp																		#gimp
 choco install -y inkscape																	#inkscape
 choco install -y blender																	#blender
+choco install -y audacity																	#audacity
 choco install -y itunes																		#itunes
-choco install -y libreoffice gimp inkscape blender itunes									#all
+choco install -y libreoffice gimp inkscape blender audacity itunes							#all
 
 #Additional
 choco install -y geforce-experience															#geforce-experience
@@ -36,3 +39,6 @@ choco install -y geforce-experience skype tightvnc kodi										#all
 
 #Developer
 .\\shortcuts.ps1 Developer.ssc
+
+#Quick
+choco install -y chocolateygui flashplayerplugin 7zip winrar ccleaner defraggler vlc jpegview pdfcreator firefox google-chrome-x64 opera libreoffice SublimeText3 SublimeText3.PackageControl					#lots of stuff

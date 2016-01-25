@@ -10,27 +10,19 @@
 #Crapware remove
 .\\RemoveOneDrive.bat																	#Remove OneDrive
 .\\Crapware.ps1																			#Remove default bloat
-.\\Privacy.ps1																			#Privacy Tweaks
-
-#64bit only ('Start>File Explorer' shows 'This PC' instead of 'Frequent folders' and 'Recent Files', also removes 'Folders' from 'This PC' main view and sidebar)
-.\\FixMyComputer.ps1																	#Fix MyComputer 
-
-#Display
-.\\Startbar.ps1																			#Taskbar tray use 'small icons' and Don't hide icons in tray
-.\\Unhide.ps1																			#Don't hide file extensions or hidden files
-.\\Dark.ps1																				#Dark Theme for Windows
-.\\FolderDetails.ps1																	#Explorer 'details' view
 
 #Tweaks
-.\\DisableUAC.ps1																		#Disable UAC
+.\\displaytweak.ps1																		#display tweak
+.\\Dark.ps1																				#Dark Theme for Windows
 
 #Chocolatey
-iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))	#install
 .\\shortcuts.ps1 Chocolatey.ssc															#chocolatey menu
-cup all -y																				#update packages
 
 #Manual install
 start https://www.safer-networking.org/spybot-anti-beacon/								#spybot antibeacon
 start https://www.avira.com/en/avira-free-antivirus 									#avira
-start https://www.softperfect.com/products/networx/										#networx
 start https://github.com/canton7/SyncTrayzor/releases									#synctrazor
+
+#comingsoon
+.\\FolderDetails.ps1																	#comingsoon - Explorer 'details' view
+.\\FileAssoc.ps1																		#comingsoon - File Assoc
