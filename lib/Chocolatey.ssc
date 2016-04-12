@@ -2,10 +2,9 @@
 iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))		#install
 cup all -y																					#update packages
 .\\installupdater.ps1																		#choco updated cupally
+choco install -y chocolateygui																#gui install
 
 #Essential
-choco install -y chocolateygui																#gui install
-choco install -y flashplayerplugin															#flash
 choco install -y 7zip																		#7zip
 choco install -y winrar																		#winrar
 choco install -y ccleaner																	#ccleaner
@@ -13,13 +12,14 @@ choco install -y defraggler																	#defraggler
 choco install -y vlc																		#vlc
 choco install -y jpegview																	#jpegview
 choco install -y pdfcreator																	#pdfcreator
-choco install -y flashplayerplugin 7zip winrar ccleaner defraggler vlc jpegview	pdfcreator	#all
+choco install -y 7zip winrar ccleaner defraggler vlc jpegview pdfcreator					#all
 
 #Browser
 choco install -y firefox																	#firefox
 choco install -y google-chrome-x64															#google-chrome-x64
 choco install -y opera																		#opera
 choco install -y firefox google-chrome-x64 opera											#all
+choco install -y flashplayerplugin															#flash
 
 #Large
 choco install -y libreoffice																#libreoffice
@@ -38,7 +38,5 @@ choco install -y kodi																		#kodi
 choco install -y geforce-experience skype tightvnc kodi										#all
 
 #Developer
-.\\shortcuts.ps1 Developer.ssc
-
-#Quick
-choco install -y chocolateygui flashplayerplugin 7zip winrar ccleaner defraggler vlc jpegview pdfcreator firefox google-chrome-x64 opera libreoffice SublimeText3 SublimeText3.PackageControl					#lots of stuff
+choco install -y SublimeText3 SublimeText3.PackageControl									#sublimetext 3
+choco install -y filezilla nodejs php python git github grepwin virtualbox putty			#dev tools

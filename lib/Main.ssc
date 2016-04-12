@@ -7,22 +7,13 @@
 ##banner=
 ##banner=
 
-#Crapware remove
-.\\RemoveOneDrive.bat																	#Remove OneDrive
-.\\Crapware.ps1																			#Remove default bloat
-
 #Tweaks
+.\\RemoveOneDrive.bat																	#Remove OneDrive
 .\\displaytweak.ps1																		#display tweak
-.\\Dark.ps1																				#Dark Theme for Windows
+.\\Crapware.ps1																			#Remove default bloat (experimental)
 
-#Chocolatey
+#Software
 .\\shortcuts.ps1 Chocolatey.ssc															#chocolatey menu
-
-#Manual install
 start https://www.safer-networking.org/spybot-anti-beacon/								#spybot antibeacon
 start https://www.avira.com/en/avira-free-antivirus 									#avira
 start https://github.com/canton7/SyncTrayzor/releases									#synctrazor
-
-#comingsoon
-.\\FolderDetails.ps1																	#comingsoon - Explorer 'details' view
-.\\FileAssoc.ps1																		#comingsoon - File Assoc
