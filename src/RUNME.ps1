@@ -1,3 +1,2 @@
-Set-Location "extra"
-.\\shortcuts.ps1 Main.ssc
-PAUSE
+Set-Location "lib"
+.\\menus\gui.ps1 menus\main.md

@@ -1,3 +1,4 @@
+##wd=.\..\tools
 ##banner=intro text
 ##banner=some more info
 ##banner=
@@ -14,6 +15,3 @@
 
 #Software
 .\\shortcuts.ps1 Chocolatey.ssc															#chocolatey menu
-start https://www.safer-networking.org/spybot-anti-beacon/								#spybot antibeacon
-start https://www.avira.com/en/avira-free-antivirus 									#avira
-start https://github.com/canton7/SyncTrayzor/releases									#synctrazor

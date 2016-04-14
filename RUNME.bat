@@ -21,6 +21,7 @@
 Remove-Item $Script:ps1file
 
 
-Set-Location "extra"
-.\\shortcuts.ps1 Main.ssc
+Set-Location "lib"
+.\\menus\gui.ps1 menus\main.md
+
 PAUSE
