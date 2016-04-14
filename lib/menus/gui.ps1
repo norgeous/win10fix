@@ -99,9 +99,8 @@ function GenerateForm {
         $form1.Controls.Add($Script:guiconfig.components[$i].formobject)
     }
 
-
-
     if ($has_checkboxes) {
+        $form_height += 10
         $System_Drawing_Size = New-Object System.Drawing.Size
         $System_Drawing_Size.Width = 280
         $System_Drawing_Size.Height = 20

@@ -1,4 +1,4 @@
-#Chocolatey Apps Installer
+#choco install
 
 ##Essential
 ###checkbox:chocolatey gui
@@ -73,6 +73,8 @@
 `choco install -y virtualbox`
 ###checkbox:putty
 `choco install -y putty`
+###checkbox:adb
+`choco install -y adb`
 
 ##Non-choc
 ###checkbox:spybot antibeacon
