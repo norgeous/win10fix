@@ -3,7 +3,7 @@
 
 ##Essential
 
-###checkbox:install chocolatey gui
+###checkbox:chocolatey gui
 `choco install -y chocolateygui`
 
 ###checkbox:7zip
