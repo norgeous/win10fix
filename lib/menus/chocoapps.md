@@ -1,5 +1,7 @@
 #choco install
 
+wd:..\tools
+
 ##Essential
 ###checkbox:chocolatey gui
 `choco install -y chocolateygui`

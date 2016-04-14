@@ -21,6 +21,6 @@
 Remove-Item $Script:ps1file
 
 
-Set-Location "lib"
-.\\menus\gui.ps1 menus\main.md
+Set-Location "lib\menus"
+.\\gui.ps1 main.md
 PAUSE 
