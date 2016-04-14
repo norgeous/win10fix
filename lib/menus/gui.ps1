@@ -1,4 +1,4 @@
-$Script:defaultshortcutsfile="main.md"
+$Script:defaultshortcutsfile="config.md"
 $Script:guiconfig = @{}
 $Script:commandstorun = @()
 
@@ -33,7 +33,7 @@ function GenerateForm {
     $form1.Icon = [system.drawing.icon]::ExtractAssociatedIcon($PSHOME + "\powershell.exe")
     $form1.DataBindings.DefaultDataSourceUpdateMode = 0
 
-    $form_height = 0
+    $form_height = 10
     $has_checkboxes = $False
 
     for ($i=0; $i -lt $Script:guiconfig.components.length; $i++) {
@@ -96,8 +96,6 @@ function GenerateForm {
         }
 
         $Script:guiconfig.components[$i].formobject.TabIndex = $i
-        #$Script:guiconfig.components[$i].formobject.DataBindings.DefaultDataSourceUpdateMode = 0
-
         $form1.Controls.Add($Script:guiconfig.components[$i].formobject)
     }
 
