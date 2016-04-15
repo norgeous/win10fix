@@ -3,3 +3,6 @@
 Semi-automate procedure that need to be done to a clean install of Windows 10
 
 ![ScreenShot](preview.png)
+
+## Download
+https://github.com/norgeous/win10fix/archive/master.zip
