@@ -1,7 +1,5 @@
 # win10fix
-
-Semi-automate procedure that need to be done to a clean install of Windows 10
-
+Semi-automate the procedure that needs to be done to a clean install of Windows 10
 ![ScreenShot](preview.png)
 
 ## Download
