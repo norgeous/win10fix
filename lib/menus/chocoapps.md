@@ -17,6 +17,8 @@ wd:..\tools
 `choco install -y vlc`
 ###checkbox:jpegview
 `choco install -y jpegview`
+###checkbox:speedcrunch calc
+`choco install -y speedcrunch`
 ###checkbox:pdfcreator
 `choco install -y pdfcreator`
 
