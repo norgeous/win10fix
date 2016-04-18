@@ -3,6 +3,10 @@ Write-Host "Removing 9E2F88E3.Twitter"
 Get-AppxPackage 9E2F88E3.Twitter | Remove-AppxPackage
 
 Write-Host
+Write-Host "Removing Microsoft.Appconnector"
+Get-AppxPackage Microsoft.Appconnector | Remove-AppxPackage
+
+Write-Host
 Write-Host "Removing Microsoft.3DBuilder"
 Get-AppxPackage Microsoft.3DBuilder | Remove-AppxPackage
 
