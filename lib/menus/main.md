@@ -14,6 +14,9 @@ wd:..\tools
 ###button:install apps (requires chocolatey)
 `cd ..\menus`
 `.\\gui.ps1 chocoapps.md`
+###button:install developer apps (requires chocolatey)
+`cd ..\menus`
+`.\\gui.ps1 developerapps.md`
 ###button:install chocolatey autoupdater
 `cd cupally`
 `.\\install.ps1`
