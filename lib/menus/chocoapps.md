@@ -7,8 +7,8 @@ wd:..\tools
 `choco install -y chocolateygui`
 ###checkbox:7zip
 `choco install -y 7zip`
-###checkbox:ccleaner ccenhancer defraggler
-`choco install -y ccleaner ccenhancer defraggler`
+###checkbox:ccleaner ccenhancer defraggler recuva
+`choco install -y ccleaner ccenhancer defraggler recuva`
 ###checkbox:vlc
 `choco install -y vlc`
 ###checkbox:jpegview
