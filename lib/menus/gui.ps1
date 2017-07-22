@@ -38,9 +38,8 @@ function GenerateForm {
 
     for ($i=0; $i -lt $Script:guiconfig.components.length; $i++) {
 
-
         switch ($Script:guiconfig.components[$i].type) {
-            
+
             "checkbox" {
                 $has_checkboxes = $True
                 $Script:guiconfig.components[$i].formobject = New-Object System.Windows.Forms.CheckBox
@@ -116,7 +115,7 @@ function GenerateForm {
         $button1.Text = "Run selected"
         $button1.UseVisualStyleBackColor = $True
         $button1.DataBindings.DefaultDataSourceUpdateMode = 0
-        $button1.add_Click({ 
+        $button1.add_Click({
             $form1.Hide()
             for ($i=0; $i -lt $Script:guiconfig.components.length; $i++) {
                 if ($Script:guiconfig.components[$i].formobject.Checked) {
@@ -183,7 +182,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
 
         # load config file
         $Local:shortcutstxt = Get-Content "$Local:shortcutsfile"
-        
+
         # overwrite default options 'wd' and 'after'
         Foreach ($Local:line in $Local:shortcutstxt) {
 
@@ -197,7 +196,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
 
             # if line starts with '##after='
             If ($Local:line.StartsWith('##after=')) {
-                
+
                 # use the remainder of the line as 'after'
                 $Local:after = $Local:line.Substring(8).Trim()
 
@@ -213,7 +212,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
             }
         }
         If (-Not $Local:hascommands) {
-            
+
             Write-Host
             Write-Color -Magenta (' Config file: "{0}" does not contain any commands' -f $Local:shortcutsfile)
             Write-Host
@@ -223,7 +222,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
             #
             # config file exists
             # config contains at least one command
-            # 
+            #
 
             # check that working dir exists
             If (-Not (Test-PathExists $Local:wd)) {
@@ -241,7 +240,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
                 # config file exists
                 # config contains at least one command
                 # working directory exists
-                # 
+                #
 
                 # change directory
                 Set-Location "$Local:wd"
@@ -249,11 +248,11 @@ function Initialize-Shortcutsbat($Local:configlocation) {
                 # show info in the console
                 Clear-Host
                 Write-Host
-                
+
                 # show some configuration info (header)
                 Write-Color -Gray ' shorcuts from:'   "`t`t" -Green "$Local:shortcutsfile"
                 Write-Color -Gray ' working directory:' "`t" -Green "$pwd"
-                
+
                 If ($Local:after -ne "") {
                     Write-Color -Gray ' after each command:' -DarkGreen "`t" '& ' $Local:after
                 }
@@ -262,43 +261,43 @@ function Initialize-Shortcutsbat($Local:configlocation) {
                 Write-Color -Gray ' parsing config file...'
 
                 # parse config.md to config hash array
-                
+
                 $Script:guiconfig["windowtitle"] = "default title"
                 $Script:guiconfig["components"]=@()
                 Foreach ($Local:line in $Local:shortcutstxt) {
 
                     # not empty lines
                     If (-Not (Test-StringEmpty $Local:line)) {
-                        
+
                         #Write-Color -DarkCyan ($Local:line)
-                        
+
                         # main window title (just one hashtag)
-                        If ($Local:line.StartsWith('#') -And -Not $Local:line.StartsWith('##')) {
-                            $Script:guiconfig["windowtitle"] = $Local:line.Substring(1)
+                        If ($Local:line.StartsWith('# ')) {
+                            $Script:guiconfig["windowtitle"] = $Local:line -replace '# ', ''
                         }
 
                         # section labels (two hashtags)
-                        If ($Local:line.StartsWith('##') -And -Not $Local:line.StartsWith('###')) {
+                        If ($Local:line.StartsWith('## ')) {
                             $Script:guiconfig.components += @{
                                 "type" = "label"
-                                "label" = $Local:line -replace '##', ''
+                                "label" = $Local:line -replace '## ', ''
                             }
                         }
-                        
+
                         # checkboxes
-                        If ($Local:line.StartsWith('###checkbox:')) {
+                        If ($Local:line.StartsWith('### checkbox:')) {
                             $Script:guiconfig.components += @{
                                 "type" = "checkbox"
-                                "label" = $Local:line -replace '###checkbox:', ''
+                                "label" = $Local:line -replace '### checkbox:', ''
                                 "commands" = @()
                             }
                         }
 
                         # buttons
-                        If ($Local:line.StartsWith('###button:')) {
+                        If ($Local:line.StartsWith('### button:')) {
                             $Script:guiconfig.components += @{
                                 "type" = "button"
-                                "label" = $Local:line -replace '###button:', ''
+                                "label" = $Local:line -replace '### button:', ''
                                 "commands" = @()
                             }
                         }
