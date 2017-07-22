@@ -35,5 +35,7 @@ Write-Host "Don't hide icons in tray"
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer -Name EnableAutoTray -Type DWord -Value 0
 
 Write-Host
-Write-Host "Restart windows explorer"
-.\\Restart_windows_explorer.bat
+$confirmation = Read-Host "Restart windows explorer? (y/n)"
+if ($confirmation -eq 'y') {
+  Stop-Process -ProcessName explorer
+}
