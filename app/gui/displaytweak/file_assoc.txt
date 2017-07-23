@@ -1,0 +1,12 @@
+
+
+
+
+
+
+
+#$ext = ".md"
+#$key = (Get-ItemProperty -Path HKLM:\SOFTWARE\Classes\$ext -Name "(Default)")."(Default)"
+#$app = (Get-ItemProperty -Path HKLM:\SOFTWARE\Classes\$key\shell\open\command -Name "(Default)")."(Default)"
+#$key = (Get-ItemProperty -Path HKCU:\SOFTWARE\Classes\$ext -Name "(Default)")."(Default)"
+#$app = (Get-ItemProperty -Path HKCU:\SOFTWARE\Classes\$key\shell\open\command -Name "(Default)")."(Default)"
