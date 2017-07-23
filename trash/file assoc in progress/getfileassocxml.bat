@@ -1,1 +1,0 @@
-dism /online /Export-DefaultAppAssociations:C:\fa.xml

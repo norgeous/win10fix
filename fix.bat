@@ -21,6 +21,16 @@
 Remove-Item $Script:ps1file
 
 
-Set-Location "lib\menus"
-.\\gui.ps1 main.md
-PAUSE 
+Set-Location "app"
+$MASTERPWD = $pwd
+
+$LASTEXITCODE = 200
+while($LASTEXITCODE -eq 200)
+{
+  Set-Location "$MASTERPWD"
+  .\\md2gui.ps1 gui\main\main_menu.md
+  Write-Host " exitcode: $LASTEXITCODE"
+}
+Write-Host " >>> exiting..."
+Write-Host
+Start-Sleep -s 6

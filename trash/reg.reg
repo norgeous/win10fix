@@ -1,6 +1,0 @@
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\ShellNoRoam\Bags\All Folders\Shell]
-"Mode"=dword:00000004
-"WFlags"=dword:00000000
-"Status"=dword:00000001
-"Address"=dword:ffffffff
-"Vid"="{137E7700-3573-11CF-AE69-08002B2E1262}"

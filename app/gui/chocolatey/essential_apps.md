@@ -1,10 +1,8 @@
-# choco install
+# Essential
 
-wd:..\tools
-
-## Essential
 ### checkbox:chocolatey gui
 `choco install -y chocolateygui`
+
 ### checkbox:7zip
 `choco install -y 7zip`
 ### checkbox:ccleaner ccenhancer defraggler recuva

@@ -1,12 +1,9 @@
-# choco install
+# Developer
 
-wd:..\tools
-
-## Software
 ### checkbox:atom
 `choco install -y atom`
-### checkbox:synctrayzor
-`choco install -y synctrayzor`
+### checkbox:meazure
+`choco install -y meazure`
 ### checkbox:gimp
 `choco install -y gimp`
 ### checkbox:inkscape
@@ -15,8 +12,8 @@ wd:..\tools
 `choco install -y blender`
 ### checkbox:audacity
 `choco install -y audacity`
-
-## Developer
+### checkbox:synctrayzor
+`choco install -y synctrayzor`
 ### checkbox:filezilla
 `choco install -y filezilla`
 ### checkbox:nodejs

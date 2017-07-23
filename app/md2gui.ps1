@@ -28,8 +28,9 @@ function GenerateForm {
     [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 
     $form1 = New-Object System.Windows.Forms.Form
-    $form1.Text = $Script:guiconfig.windowtitle
     $form1.Name = "form1"
+    $form1.StartPosition = "CenterScreen"
+    $form1.Text = $Script:guiconfig.windowtitle
     $form1.Icon = [system.drawing.icon]::ExtractAssociatedIcon($PSHOME + "\powershell.exe")
     $form1.DataBindings.DefaultDataSourceUpdateMode = 0
 
@@ -58,15 +59,17 @@ function GenerateForm {
                 $Script:guiconfig.components[$i].formobject = New-Object System.Windows.Forms.Button
                 $System_Drawing_Size = New-Object System.Drawing.Size
                 $System_Drawing_Size.Width = 280
-                $System_Drawing_Size.Height = 20
+                $System_Drawing_Size.Height = 35
                 $Script:guiconfig.components[$i].formobject.Size = $System_Drawing_Size
                 $System_Drawing_Point = New-Object System.Drawing.Point
                 $System_Drawing_Point.X = 10
                 $System_Drawing_Point.Y = $form_height
-                $form_height += 25
+                $form_height += $System_Drawing_Size.Height + 5
                 $Script:guiconfig.components[$i].formobject.Location = $System_Drawing_Point
                 $Script:guiconfig.components[$i].formobject.Name = "button"+$i
                 $Script:guiconfig.components[$i].formobject.Text = $Script:guiconfig.components[$i].label
+                # Font styles are: Regular, Bold, Italic, Underline, Strikeout
+                $Script:guiconfig.components[$i].formobject.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Regular)
                 $Script:guiconfig.components[$i].formobject.add_Click({
                     $form1.Hide()
                     for ($m=0; $m -lt $Script:guiconfig.components.length; $m++) {
@@ -102,17 +105,18 @@ function GenerateForm {
         $form_height += 10
         $System_Drawing_Size = New-Object System.Drawing.Size
         $System_Drawing_Size.Width = 280
-        $System_Drawing_Size.Height = 20
+        $System_Drawing_Size.Height = 35
         $System_Drawing_Point = New-Object System.Drawing.Point
         $System_Drawing_Point.X = 10
         $System_Drawing_Point.Y = $form_height
-        $form_height += 18
+        $form_height += $System_Drawing_Size.Height + 5
         $button1 = New-Object System.Windows.Forms.Button
         $button1.Size = $System_Drawing_Size
         $button1.Location = $System_Drawing_Point
         $button1.TabIndex = $apps.length+1
         $button1.Name = "button1"
         $button1.Text = "Run selected"
+        $button1.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Regular)
         $button1.UseVisualStyleBackColor = $True
         $button1.DataBindings.DefaultDataSourceUpdateMode = 0
         $button1.add_Click({
@@ -141,13 +145,14 @@ function GenerateForm {
 
     $InitialFormWindowState = $form1.WindowState
     $form1.add_Load($OnLoadForm_StateCorrection)
-    $form1.ShowDialog()| Out-Null
+    Write-Color -Gray ' waiting for user...'
+    $form1.ShowDialog() | Out-Null
 }
 
 # main logic
 function Initialize-Shortcutsbat($Local:configlocation) {
 
-    Clear-Host
+    #Clear-Host
 
     # if no shortcuts config supplied
     If (Test-StringEmpty $Local:configlocation) {
@@ -166,8 +171,10 @@ function Initialize-Shortcutsbat($Local:configlocation) {
     If (-Not (Test-PathExists $Local:shortcutsfile)) {
 
         Write-Host
+        Write-Host " $pwd"
         Write-Color -Magenta (' Config file: "{0}" was not found' -f $Local:shortcutsfile)
         Write-Host
+        Exit 404
 
     } Else {
 
@@ -178,6 +185,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
         # set up defaults for options
         $Local:shortcutsfile = (Resolve-Path $Local:shortcutsfile | %{$_.Path})
         $Local:wd = Split-Path -Path $Local:shortcutsfile               # set the working dir same as shortcuts config file location
+        Set-Location "$Local:wd"                                        # change directory
         $Local:after = ""                                               # set default command that runs afterwards as empty
 
         # load config file
@@ -216,6 +224,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
             Write-Host
             Write-Color -Magenta (' Config file: "{0}" does not contain any commands' -f $Local:shortcutsfile)
             Write-Host
+            Exit 500
 
         } Else {
 
@@ -228,11 +237,10 @@ function Initialize-Shortcutsbat($Local:configlocation) {
             If (-Not (Test-PathExists $Local:wd)) {
 
                 Write-Host
+                Write-Host " $pwd"
                 Write-Color -Magenta (' Working directory: "{0}" was not found' -f $Local:wd)
-                Write-Host $pwd
-                Write-Host (Test-StringEmpty $Local:wd)
-                Write-Host (Test-Path "$Local:wd")
                 Write-Host
+                Exit 404
 
             } Else {
 
@@ -246,8 +254,8 @@ function Initialize-Shortcutsbat($Local:configlocation) {
                 Set-Location "$Local:wd"
 
                 # show info in the console
-                Clear-Host
                 Write-Host
+                Write-Color -Yellow " PS> " -Cyan "md2gui.ps1"
 
                 # show some configuration info (header)
                 Write-Color -Gray ' shorcuts from:'   "`t`t" -Green "$Local:shortcutsfile"
@@ -257,7 +265,6 @@ function Initialize-Shortcutsbat($Local:configlocation) {
                     Write-Color -Gray ' after each command:' -DarkGreen "`t" '& ' $Local:after
                 }
 
-                Write-Host
                 Write-Color -Gray ' parsing config file...'
 
                 # parse config.md to config hash array
@@ -315,17 +322,16 @@ function Initialize-Shortcutsbat($Local:configlocation) {
 
 
                 # create gui query
-                Write-Color -Gray ' making gui...'
+                Write-Color -Gray ' building gui...'
                 GenerateForm
+
                 # code blocked until form returns
-
-                Write-Host
-
+                $Local:num_commands = @($Script:commandstorun).Length
+                Write-Color -Gray " gui returned $Local:num_commands command(s)..."
                 foreach ($command in $Script:commandstorun) {
-                    Write-Host ">>" $command
                     Write-Host
+                    Write-Color -Yellow " PS> " -Cyan "$command"
                     iex $command
-                    Write-Host
                 }
 
 
@@ -339,21 +345,8 @@ function Initialize-Shortcutsbat($Local:configlocation) {
 
 } # end Initialize-Shortcutsbat function
 
-
-
-
-
-
-
-
-
-
-
-
-
 # start the checks and mainloop (eventually)
 If (-Not $Script:arguments) {$Script:arguments=@(); ForEach ($Local:v in $Args) {$Script:arguments += $Local:v}}
 Initialize-Shortcutsbat $Script:arguments[0]
 
-#Write-Host "complete"
-#Start-Sleep -s 5
+Exit $(If ($LASTEXITCODE) {$LASTEXITCODE} Else {200})
