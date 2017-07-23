@@ -8,7 +8,7 @@ regedit /s $pwd\64-bit_Remove_All_user_Folders_in_This_PC.reg
 #Set-ItemProperty -Path "HKLM:\SOFTWARE\Classes\CLSID\{1CF1260C-4DD0-4ebb-811F-33C572699FDE}" -Name System.IsPinnedToNameSpaceTree -Value 0
 
 #http://www.tenforums.com/tutorials/17707-folder-view-settings-reset-default-windows-10-a.html
-Write-Host "Reset Folder View Settings of All Folders to Default $pwd"
+Write-Host "Reset Folder View Settings of All Folders to Default"
 .\\Reset_Folder_View_Settings_of_All_Folders_to_Default.bat
 
 #http://www.askvg.com/how-to-fix-annoying-folder-view-type-problem-in-windows-vista/

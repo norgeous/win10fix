@@ -8,7 +8,7 @@
 ### button:Remove win10 bloatware
 `.\\crapware.ps1`
 ### button:Display tweak
-`cd displaytweak`
+`cd ..\displaytweak`
 `.\\displaytweak.ps1`
 ### button:Disable UAC
 `Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA -Type DWord -Value 0`
