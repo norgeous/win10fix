@@ -1,6 +1,6 @@
 # norgeous/win10fix
 
-### button:Chocolatey
+### button:Chocolatey...
 `cd ..\..\`
 `.\\md2gui.ps1 gui\chocolatey\chocolatey.md`
 ### button:Remove OneDrive
