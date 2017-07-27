@@ -25,5 +25,8 @@
 ### checkbox:Don't hide icons in tray
 `Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer -Name EnableAutoTray -Type DWord -Value 0`
 
-## Currently its one way only.
+### checkbox:Restart explorer.exe
+`Stop-Process -ProcessName explorer`
+
+## Currently its one-way only.
 ## This tool cannot undo the above actions.
