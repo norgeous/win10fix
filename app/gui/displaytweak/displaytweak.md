@@ -25,7 +25,7 @@
 ### checkbox:Don't hide icons in tray
 `Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer -Name EnableAutoTray -Type DWord -Value 0`
 
-### button:Disable UAC
+### checkbox:Disable UAC
 `Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA -Type DWord -Value 0`
 
 ### checkbox:Restart explorer.exe
