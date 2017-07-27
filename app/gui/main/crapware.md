@@ -71,3 +71,6 @@
 
 ### checkbox:Remove microsoft.windowscommunicationsapps
 `Get-AppxPackage microsoft.windowscommunicationsapps | Remove-AppxPackage`
+
+### checkbox:Remove OneDrive
+`.\\RemoveOneDrive.bat`
