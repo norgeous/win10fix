@@ -1,13 +1,21 @@
+#Get-ExecutionPolicy
+#Set-ExecutionPolicy bypass
+
 $Script:defaultshortcutsfile="config.md"
 $Script:guiconfig = @{}
 $Script:commandstorun = @()
 
 # validation helpers
-function Test-StringEmpty($String){
-    return ([string]::IsNullOrEmpty($Local:String) -Or [string]::IsNullOrWhiteSpace($String))
+function Test-StringIsNullOrWhitespace($String){
+    return (Test-StringIsNullOrWhitespace($String))
+}
+function Test-StringIsNullOrWhitespace([string] $string)
+{
+    if ($string -ne $null) { $string = $string.Trim() }
+    return [string]::IsNullOrEmpty($string)
 }
 function Test-PathExists($String){
-    return (-Not (Test-StringEmpty $Local:String) -And (Test-Path $Local:String))
+    return (-Not (Test-StringIsNullOrWhitespace $Local:String) -And (Test-Path $Local:String))
 }
 
 # colour terminal output function adapted from http://stackoverflow.com/a/30265949
@@ -155,7 +163,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
     #Clear-Host
 
     # if no shortcuts config supplied
-    If (Test-StringEmpty $Local:configlocation) {
+    If (Test-StringIsNullOrWhitespace $Local:configlocation) {
 
         # set as same dir as bat file
         $Local:shortcutsfile = ('{0}\{1}' -f $pwd, $Script:defaultshortcutsfile)
@@ -214,7 +222,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
         # check config has at least one command
         $Local:hascommands = $False
         Foreach ($Local:line in $Local:shortcutstxt) {
-            If (-Not (Test-StringEmpty $Local:line) -And -Not $Local:line.StartsWith('#')) {
+            If (-Not (Test-StringIsNullOrWhitespace $Local:line) -And -Not $Local:line.StartsWith('#')) {
                 $Local:hascommands = $True
                 break
             }
@@ -274,7 +282,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
                 Foreach ($Local:line in $Local:shortcutstxt) {
 
                     # not empty lines
-                    If (-Not (Test-StringEmpty $Local:line)) {
+                    If (-Not (Test-StringIsNullOrWhitespace $Local:line)) {
 
                         #Write-Color -DarkCyan ($Local:line)
 
