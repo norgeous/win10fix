@@ -3,6 +3,9 @@
 ### button:Chocolatey...
 `cd ..\..\`
 `.\\md2gui.ps1 gui\chocolatey\chocolatey.md`
+### button:Atom packages...
+`cd ..\..\`
+`.\\md2gui.ps1 gui\apm.md`
 ### button:Remove OneDrive
 `.\\RemoveOneDrive.bat`
 ### button:Remove win10 bloatware
