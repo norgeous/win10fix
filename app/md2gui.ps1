@@ -6,9 +6,6 @@ $Script:guiconfig = @{}
 $Script:commandstorun = @()
 
 # validation helpers
-function Test-StringIsNullOrWhitespace($String){
-    return (Test-StringIsNullOrWhitespace($String))
-}
 function Test-StringIsNullOrWhitespace([string] $string)
 {
     if ($string -ne $null) { $string = $string.Trim() }
