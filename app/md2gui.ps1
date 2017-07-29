@@ -97,7 +97,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
             Write-Host
             Write-Color -Magenta (' Config file: "{0}" does not contain any commands' -f $Local:shortcutsfile)
             Write-Host
-            Exit 500
+            Exit 405
 
         } Else {
 
@@ -201,6 +201,8 @@ function Initialize-Shortcutsbat($Local:configlocation) {
                     Write-Host
                     Write-Color -Yellow " PS> " -Cyan "$command"
                     iex $command
+                    Write-Color -Yellow " PS> " -Gray " exitcode: " -Red "$(If ($LASTEXITCODE) {$LASTEXITCODE} Else {'no code'})"
+                    Write-Host
                 }
 
 
@@ -343,10 +345,10 @@ function GenerateForm {
 }
 
 # show info in the console
-Write-Host
-Write-Color -Yellow " PS> " -Cyan "$Script:md2guiDirectory\md2gui.ps1 $Args"
+Write-Color -Yellow " md2gui.ps1>`t`t" -Cyan (Split-Path -Leaf $Args[0])
 
 # start the checks and mainloop (eventually)
 Initialize-Shortcutsbat $Args[0]
 
-Exit $(If ($LastExitCode) {$LastExitCode} Else {200})
+# preserve exit code
+Exit $LASTEXITCODE

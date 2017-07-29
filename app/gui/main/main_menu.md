@@ -10,4 +10,4 @@
 `. "$md2guiDirectory\md2gui.ps1" "$md2guiDirectory\gui\displaytweak\displaytweak.md"`
 
 ### button:Quit
-`Exit 500`
+`Exit 410`
