@@ -3,7 +3,7 @@ Semi-automate the procedure that needs to be done to a clean install of Windows 
 ![ScreenShot](app/preview.png)
 
 ## Download
-[Latest Unstable](archive/master.zip)
+[Latest Unstable](https://github.com/norgeous/win10fix/archive/master.zip)
 
 ## Additional
 
@@ -14,4 +14,4 @@ alias t='S:\\path\\too\\win10fix\\tool.bat'
 ```
 
 ### md2gui.ps1 documentation
-[documentation](app/gui/apm.md)
+[documentation](app/md2gui.md)
