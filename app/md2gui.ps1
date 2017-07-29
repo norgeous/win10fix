@@ -198,7 +198,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
                 $label = $commandlabels[$i]
                 Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$label> " -Cyan "$command"
                 iex $command
-                Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$label> " -Gray "returned exitcode: " -Red "$(If ($LASTEXITCODE) {$LASTEXITCODE} Else {'no code'})"
+                Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$label> " -Gray "exitcode: $LASTEXITCODE"
                 If ($LASTEXITCODE) {
                   Exit $LASTEXITCODE
                 }
