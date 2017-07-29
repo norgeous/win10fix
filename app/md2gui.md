@@ -1,25 +1,38 @@
 # md2gui api
 The `md2gui.ps1` parses `.md` files to create forms, details below.
 
-## window title
+## Controlling the form
+
+### window title
 ```
 # My Window Title
 ```
 
-## section title
+### section title
 ```
 ## My Section
 ```
 
-## button
+### button
 ```
 ### button:My Button
 ```
 followed by commands.
 
-## checkbox
+### checkbox
 ```
 ### checkbox:My Checkbox
 ```
-followed by commands. 
+followed by commands.
 any form with checkboxes automatically has a button added to the form (to run selected commands).
+
+
+
+
+## Useful
+
+### Git bash shortcut
+in `.bashrc` add:
+```
+alias t='S:\\path\\too\\win10fix\\tool.bat'
+```
