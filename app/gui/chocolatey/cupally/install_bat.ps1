@@ -1,17 +1,17 @@
-If (-Not $Script:arguments) {$Script:arguments=@(); ForEach ($Local:v in $Args) {$Script:arguments += $Local:v}}
-$bat_to_install = $Script:arguments[0]
+$Local:BatDirectory = (Split-Path -Path $Args[0])
+$Local:BatFile = (Split-Path -Leaf $Args[0])
 
-Copy-Item "$pwd\$bat_to_install" "C:\$bat_to_install"
-Write-Host "$bat_to_install copied to C:\$bat_to_install"
-
-$WshShell = New-Object -ComObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\$bat_to_install.lnk")
-$Shortcut.TargetPath = "C:\$bat_to_install"
-$Shortcut.Save()
-Write-Host "windows autostart created for C:\$bat_to_install"
+Copy-Item "$Local:BatDirectory\$Local:BatFile" "C:\$Local:BatFile"
+Write-Host "$Local:BatFile copied to C:\$Local:BatFile"
 
 $WshShell = New-Object -ComObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\$bat_to_install.lnk")
-$Shortcut.TargetPath = "C:\$bat_to_install"
+$Shortcut = $WshShell.CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\$Local:BatFile.lnk")
+$Shortcut.TargetPath = "C:\$Local:BatFile"
 $Shortcut.Save()
-Write-Host "windows start menu shortcut installed for $bat_to_install"
+Write-Host "windows autostart created for C:\$Local:BatFile"
+
+$WshShell = New-Object -ComObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\$Local:BatFile.lnk")
+$Shortcut.TargetPath = "C:\$Local:BatFile"
+$Shortcut.Save()
+Write-Host "windows start menu shortcut installed for $Local:BatFile"

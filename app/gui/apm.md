@@ -1,10 +1,10 @@
 # Atom packages
 
-## framework
+## Framework
 ### checkbox:php-twig
 `apm install php-twig`
 
-## automation framework
+## Automation Framework
 ### checkbox:language-gherkin
 `apm install language-gherkin`
 ### checkbox:gherkin-autocomplete
@@ -41,3 +41,9 @@
 `apm install highlight-selected`
 ### checkbox:simple-drag-drop-text
 `apm install simple-drag-drop-text`
+
+## Additional Languages
+### checkbox:language-batch
+`apm install language-batch`
+### checkbox:language-powershell
+`apm install language-powershell`

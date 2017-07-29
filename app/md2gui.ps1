@@ -26,6 +26,194 @@ function Write-Color {
     Write-Host
 }
 
+# main logic
+function Initialize-Shortcutsbat($Local:configlocation) {
+
+    # if no shortcuts config supplied
+    If (Test-StringIsNullOrWhitespace $Local:configlocation) {
+
+        # set as same dir as bat file
+        $Local:shortcutsfile = ('{0}\{1}' -f $pwd, $Script:defaultshortcutsfile)
+
+    } Else {
+
+        # else use supplied file
+        $Local:shortcutsfile = $Local:configlocation
+
+    }
+
+    # check shortcuts config file actually exists
+    If (-Not (Test-PathExists $Local:shortcutsfile)) {
+
+        Write-Host
+        Write-Host " $pwd"
+        Write-Color -Magenta (' Config file: "{0}" was not found' -f $Local:shortcutsfile)
+        Write-Host
+        Exit 404
+
+    } Else {
+
+        #
+        # config file exists
+        #
+
+        # set up defaults for options
+        $Local:shortcutsfile = (Resolve-Path $Local:shortcutsfile | %{$_.Path})
+        $Local:after = ""                                               # set default command that runs afterwards as empty
+
+        # load config file
+        $Local:shortcutstxt = Get-Content "$Local:shortcutsfile"
+
+        # overwrite default options 'wd' and 'after'
+        Foreach ($Local:line in $Local:shortcutstxt) {
+
+            # if line starts with '##wd='
+            If ($Local:line.StartsWith('wd:')) {
+
+                # use the remainder of the line as the new working dir
+                $Local:wd = $Local:line -replace 'wd:', ''
+
+            }
+
+            # if line starts with '##after='
+            If ($Local:line.StartsWith('##after=')) {
+
+                # use the remainder of the line as 'after'
+                $Local:after = $Local:line.Substring(8).Trim()
+
+            }
+        }
+
+        # check config has at least one command
+        $Local:hascommands = $False
+        Foreach ($Local:line in $Local:shortcutstxt) {
+            If (-Not (Test-StringIsNullOrWhitespace $Local:line) -And -Not $Local:line.StartsWith('#')) {
+                $Local:hascommands = $True
+                break
+            }
+        }
+        If (-Not $Local:hascommands) {
+
+            Write-Host
+            Write-Color -Magenta (' Config file: "{0}" does not contain any commands' -f $Local:shortcutsfile)
+            Write-Host
+            Exit 500
+
+        } Else {
+
+            #
+            # config file exists
+            # config contains at least one command
+            #
+
+            # check that working dir exists
+            If (($Local:wd -ne $null) -And -Not (Test-PathExists $Local:wd)) {
+
+                Write-Host
+                Write-Host " $pwd"
+                Write-Color -Magenta (' Working directory from config: "{0}" was not found' -f $Local:wd)
+                Write-Host
+                Exit 404
+
+            } Else {
+
+                #
+                # config file exists
+                # config contains at least one command
+                # working directory exists
+                #
+
+                # change directory
+                Set-Location "$Local:wd"
+
+                # show some configuration info (header)
+                Write-Color -Gray ' shorcuts from:'   "`t`t" -Green "$Local:shortcutsfile"
+                Write-Color -Gray ' working directory:' "`t" -Green "$pwd"
+
+                If ($Local:after -ne "") {
+                    Write-Color -Gray ' after each command:' -DarkGreen "`t" '& ' $Local:after
+                }
+
+                Write-Color -Gray ' parsing config file...'
+
+                # parse config.md to config hash array
+
+                $Script:guiconfig["windowtitle"] = "default title"
+                $Script:guiconfig["components"]=@()
+                Foreach ($Local:line in $Local:shortcutstxt) {
+
+                    # not empty lines
+                    If (-Not (Test-StringIsNullOrWhitespace $Local:line)) {
+
+                        #Write-Color -DarkCyan ($Local:line)
+
+                        # main window title (just one hashtag)
+                        If ($Local:line.StartsWith('# ')) {
+                            $Script:guiconfig["windowtitle"] = $Local:line -replace '# ', ''
+                        }
+
+                        # section labels (two hashtags)
+                        If ($Local:line.StartsWith('## ')) {
+                            $Script:guiconfig.components += @{
+                                "type" = "label"
+                                "label" = $Local:line -replace '## ', ''
+                            }
+                        }
+
+                        # checkboxes
+                        If ($Local:line.StartsWith('### checkbox:')) {
+                            $Script:guiconfig.components += @{
+                                "type" = "checkbox"
+                                "label" = $Local:line -replace '### checkbox:', ''
+                                "commands" = @()
+                            }
+                        }
+
+                        # buttons
+                        If ($Local:line.StartsWith('### button:')) {
+                            $Script:guiconfig.components += @{
+                                "type" = "button"
+                                "label" = $Local:line -replace '### button:', ''
+                                "commands" = @()
+                            }
+                        }
+
+                        # commands
+                        If ($Local:line.StartsWith('`')) {
+                            $command = $line -replace '`', ''
+                            $Script:guiconfig.components[$Script:guiconfig.components.length-1].commands += $command
+                        }
+
+
+
+                    }
+                }
+
+
+                # create gui query
+                Write-Color -Gray ' building gui...'
+                GenerateForm
+
+                # code blocked until form returns
+                $Local:num_commands = @($Script:commandstorun).Length
+                Write-Color -Gray " gui returned $Local:num_commands command(s)..."
+                foreach ($command in $Script:commandstorun) {
+                    Write-Host
+                    Write-Color -Yellow " PS> " -Cyan "$command"
+                    iex $command
+                }
+
+
+                # Initialize-Shortcutsbat function completes here
+
+            } # end working dir exists
+
+        } # end config has commands
+
+    } # end config exists
+
+} # end Initialize-Shortcutsbat function
+
 # make a gui form
 function GenerateForm {
 
@@ -154,204 +342,11 @@ function GenerateForm {
     $form1.ShowDialog() | Out-Null
 }
 
-# main logic
-function Initialize-Shortcutsbat($Local:configlocation) {
-
-    #Clear-Host
-
-    # if no shortcuts config supplied
-    If (Test-StringIsNullOrWhitespace $Local:configlocation) {
-
-        # set as same dir as bat file
-        $Local:shortcutsfile = ('{0}\{1}' -f $pwd, $Script:defaultshortcutsfile)
-
-    } Else {
-
-        # else use supplied file
-        $Local:shortcutsfile = $Local:configlocation
-
-    }
-
-    # check shortcuts config file actually exists
-    If (-Not (Test-PathExists $Local:shortcutsfile)) {
-
-        Write-Host
-        Write-Host " $pwd"
-        Write-Color -Magenta (' Config file: "{0}" was not found' -f $Local:shortcutsfile)
-        Write-Host
-        Exit 404
-
-    } Else {
-
-        #
-        # config file exists
-        #
-
-        # set up defaults for options
-        $Local:shortcutsfile = (Resolve-Path $Local:shortcutsfile | %{$_.Path})
-        $Local:wd = Split-Path -Path $Local:shortcutsfile               # set the working dir same as shortcuts config file location
-        Set-Location "$Local:wd"                                        # change directory
-        $Local:after = ""                                               # set default command that runs afterwards as empty
-
-        # load config file
-        $Local:shortcutstxt = Get-Content "$Local:shortcutsfile"
-
-        # overwrite default options 'wd' and 'after'
-        Foreach ($Local:line in $Local:shortcutstxt) {
-
-            # if line starts with '##wd='
-            If ($Local:line.StartsWith('wd:')) {
-
-                # use the remainder of the line as the new working dir
-                $Local:wd = $Local:line -replace 'wd:', ''
-
-            }
-
-            # if line starts with '##after='
-            If ($Local:line.StartsWith('##after=')) {
-
-                # use the remainder of the line as 'after'
-                $Local:after = $Local:line.Substring(8).Trim()
-
-            }
-        }
-
-        # check config has at least one command
-        $Local:hascommands = $False
-        Foreach ($Local:line in $Local:shortcutstxt) {
-            If (-Not (Test-StringIsNullOrWhitespace $Local:line) -And -Not $Local:line.StartsWith('#')) {
-                $Local:hascommands = $True
-                break
-            }
-        }
-        If (-Not $Local:hascommands) {
-
-            Write-Host
-            Write-Color -Magenta (' Config file: "{0}" does not contain any commands' -f $Local:shortcutsfile)
-            Write-Host
-            Exit 500
-
-        } Else {
-
-            #
-            # config file exists
-            # config contains at least one command
-            #
-
-            # check that working dir exists
-            If (-Not (Test-PathExists $Local:wd)) {
-
-                Write-Host
-                Write-Host " $pwd"
-                Write-Color -Magenta (' Working directory: "{0}" was not found' -f $Local:wd)
-                Write-Host
-                Exit 404
-
-            } Else {
-
-                #
-                # config file exists
-                # config contains at least one command
-                # working directory exists
-                #
-
-                # change directory
-                Set-Location "$Local:wd"
-
-                # show info in the console
-                Write-Host
-                Write-Color -Yellow " PS> " -Cyan "md2gui.ps1"
-
-                # show some configuration info (header)
-                Write-Color -Gray ' shorcuts from:'   "`t`t" -Green "$Local:shortcutsfile"
-                Write-Color -Gray ' working directory:' "`t" -Green "$pwd"
-
-                If ($Local:after -ne "") {
-                    Write-Color -Gray ' after each command:' -DarkGreen "`t" '& ' $Local:after
-                }
-
-                Write-Color -Gray ' parsing config file...'
-
-                # parse config.md to config hash array
-
-                $Script:guiconfig["windowtitle"] = "default title"
-                $Script:guiconfig["components"]=@()
-                Foreach ($Local:line in $Local:shortcutstxt) {
-
-                    # not empty lines
-                    If (-Not (Test-StringIsNullOrWhitespace $Local:line)) {
-
-                        #Write-Color -DarkCyan ($Local:line)
-
-                        # main window title (just one hashtag)
-                        If ($Local:line.StartsWith('# ')) {
-                            $Script:guiconfig["windowtitle"] = $Local:line -replace '# ', ''
-                        }
-
-                        # section labels (two hashtags)
-                        If ($Local:line.StartsWith('## ')) {
-                            $Script:guiconfig.components += @{
-                                "type" = "label"
-                                "label" = $Local:line -replace '## ', ''
-                            }
-                        }
-
-                        # checkboxes
-                        If ($Local:line.StartsWith('### checkbox:')) {
-                            $Script:guiconfig.components += @{
-                                "type" = "checkbox"
-                                "label" = $Local:line -replace '### checkbox:', ''
-                                "commands" = @()
-                            }
-                        }
-
-                        # buttons
-                        If ($Local:line.StartsWith('### button:')) {
-                            $Script:guiconfig.components += @{
-                                "type" = "button"
-                                "label" = $Local:line -replace '### button:', ''
-                                "commands" = @()
-                            }
-                        }
-
-                        # commands
-                        If ($Local:line.StartsWith('`')) {
-                            $command = $line -replace '`', ''
-                            $Script:guiconfig.components[$Script:guiconfig.components.length-1].commands += $command
-                        }
-
-
-
-                    }
-                }
-
-
-                # create gui query
-                Write-Color -Gray ' building gui...'
-                GenerateForm
-
-                # code blocked until form returns
-                $Local:num_commands = @($Script:commandstorun).Length
-                Write-Color -Gray " gui returned $Local:num_commands command(s)..."
-                foreach ($command in $Script:commandstorun) {
-                    Write-Host
-                    Write-Color -Yellow " PS> " -Cyan "$command"
-                    iex $command
-                }
-
-
-                # Initialize-Shortcutsbat function completes here
-
-            } # end working dir exists
-
-        } # end config has commands
-
-    } # end config exists
-
-} # end Initialize-Shortcutsbat function
+# show info in the console
+Write-Host
+Write-Color -Yellow " PS> " -Cyan "$Script:md2guiDirectory\md2gui.ps1 $Args"
 
 # start the checks and mainloop (eventually)
-If (-Not $Script:arguments) {$Script:arguments=@(); ForEach ($Local:v in $Args) {$Script:arguments += $Local:v}}
-Initialize-Shortcutsbat $Script:arguments[0]
+Initialize-Shortcutsbat $Args[0]
 
-Exit $(If ($LASTEXITCODE) {$LASTEXITCODE} Else {200})
+Exit $(If ($LastExitCode) {$LastExitCode} Else {200})
