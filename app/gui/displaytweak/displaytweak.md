@@ -4,16 +4,15 @@
 `Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 1`
 
 ### checkbox:Remove 'Folder' shortcuts from 'This PC'
-`.\\this_pc_shortcuts.ps1`
+`. "$md2guiDirectory\gui\displaytweak\this_pc_shortcuts.ps1"`
 
 ### checkbox:Set Folder View Settings to Default (All Folders)
-`.\\reset_folder_defaults.ps1`
+`. "$md2guiDirectory\gui\displaytweak\reset_folder_defaults.ps1"`
 
 ### checkbox:Disable Automatic Folder Type Discovery
-`regedit /s $pwd\Disable_Automatic_Folder_Type_Discovery.reg`
+`regedit /s "$md2guiDirectory\gui\displaytweak\Disable_Automatic_Folder_Type_Discovery.reg"`
 
 ### checkbox:Show file extensions
-`Write-Host 'Show file extensions'`
 `Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name HideFileExt -Type DWord -Value 0`
 
 ### checkbox:Show hidden files

@@ -73,4 +73,4 @@
 `Get-AppxPackage microsoft.windowscommunicationsapps | Remove-AppxPackage`
 
 ### checkbox:Remove OneDrive
-`.\\RemoveOneDrive.bat`
+`. "$md2guiDirectory\gui\main\RemoveOneDrive.bat"`
