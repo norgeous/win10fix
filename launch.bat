@@ -23,6 +23,7 @@
 @@# kill $pid
 Remove-Item "$Script:ps1file"
 Write-Host "PowerShell Version: $($PSVersionTable.PSVersion)"
+Write-Host
 
 # Write-Host "Tool`t`t`t$Script:ToolDirectory + $Script:ToolFile (tool.bat info)"
 # Write-Host "ps1file`t`t`t$Script:ps1file (file running in temp dir)"

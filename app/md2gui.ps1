@@ -193,9 +193,9 @@ function Initialize-Shortcutsbat($Local:configlocation) {
             # code blocked until form returns
             $Local:num_commands = @($Script:commandstorun).Length
             Write-Color -Gray " gui returned $Local:num_commands command(s)..."
-            for ($i=0; $i -lt $Script:commandstorun.length; $i++) {
-                $command = $Script:commandstorun[$i]
-                $label = $commandlabels[$i]
+            for ($Local:i=0; $Local:i -lt $Script:commandstorun.length; $Local:i++) {
+                $command = $Script:commandstorun[$Local:i]
+                $label = $Script:commandlabels[$Local:i]
                 Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$label> " -Cyan "$command"
                 iex $command
                 Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$label> " -Gray "exitcode: $LASTEXITCODE"
@@ -252,7 +252,7 @@ function GenerateForm {
                 $Script:guiconfig.components[$i].formobject = New-Object System.Windows.Forms.Button
                 $System_Drawing_Size = New-Object System.Drawing.Size
                 $System_Drawing_Size.Width = 280
-                $System_Drawing_Size.Height = 35
+                $System_Drawing_Size.Height = 30
                 $Script:guiconfig.components[$i].formobject.Size = $System_Drawing_Size
                 $System_Drawing_Point = New-Object System.Drawing.Point
                 $System_Drawing_Point.X = 10
