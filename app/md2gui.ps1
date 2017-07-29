@@ -3,6 +3,7 @@
 
 $Script:defaultshortcutsfile="config.md"
 $Script:guiconfig = @{}
+$Script:commandlabels = @()
 $Script:commandstorun = @()
 
 # validation helpers
@@ -59,6 +60,7 @@ function Initialize-Shortcutsbat($Local:configlocation) {
 
         # set up defaults for options
         $Local:shortcutsfile = (Resolve-Path $Local:shortcutsfile | %{$_.Path})
+        $Local:shortcutsfilename = (Split-Path -Leaf $Local:shortcutsfile)
         $Local:after = ""                                               # set default command that runs afterwards as empty
 
         # load config file
@@ -72,6 +74,18 @@ function Initialize-Shortcutsbat($Local:configlocation) {
 
                 # use the remainder of the line as the new working dir
                 $Local:wd = $Local:line -replace 'wd:', ''
+
+                # check that working dir exists
+                If (($Local:wd -ne $null) -And -Not (Test-PathExists $Local:wd)) {
+                    Write-Host
+                    Write-Host " $pwd"
+                    Write-Color -Magenta (' Working directory from config: "{0}" was not found' -f $Local:wd)
+                    Write-Host
+                    Exit 404
+                } Else {
+                  # change directory
+                  Set-Location "$Local:wd"
+                }
 
             }
 
@@ -103,112 +117,96 @@ function Initialize-Shortcutsbat($Local:configlocation) {
 
             #
             # config file exists
+            # working directory may have been set
             # config contains at least one command
             #
 
-            # check that working dir exists
-            If (($Local:wd -ne $null) -And -Not (Test-PathExists $Local:wd)) {
+            # show some configuration info (header)
+            Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename>" -Green " START"
+            Write-Color -Gray ' shortcuts from:'   "`t" -Green "$Local:shortcutsfile"
+            Write-Color -Gray ' working directory:' "`t" -Green "$pwd"
 
-                Write-Host
-                Write-Host " $pwd"
-                Write-Color -Magenta (' Working directory from config: "{0}" was not found' -f $Local:wd)
-                Write-Host
-                Exit 404
+            If ($Local:after -ne "") {
+                Write-Color -Gray ' after each command:' -DarkGreen "`t" '& ' $Local:after
+            }
 
-            } Else {
+            Write-Color -Gray ' parsing config file...'
 
-                #
-                # config file exists
-                # config contains at least one command
-                # working directory exists
-                #
+            # parse config.md to config hash array
 
-                # change directory
-                Set-Location "$Local:wd"
+            $Script:guiconfig["windowtitle"] = "default title"
+            $Script:guiconfig["components"]=@()
+            Foreach ($Local:line in $Local:shortcutstxt) {
 
-                # show some configuration info (header)
-                Write-Color -Gray ' shorcuts from:'   "`t`t" -Green "$Local:shortcutsfile"
-                Write-Color -Gray ' working directory:' "`t" -Green "$pwd"
+                # not empty lines
+                If (-Not (Test-StringIsNullOrWhitespace $Local:line)) {
 
-                If ($Local:after -ne "") {
-                    Write-Color -Gray ' after each command:' -DarkGreen "`t" '& ' $Local:after
-                }
+                    #Write-Color -DarkCyan ($Local:line)
 
-                Write-Color -Gray ' parsing config file...'
-
-                # parse config.md to config hash array
-
-                $Script:guiconfig["windowtitle"] = "default title"
-                $Script:guiconfig["components"]=@()
-                Foreach ($Local:line in $Local:shortcutstxt) {
-
-                    # not empty lines
-                    If (-Not (Test-StringIsNullOrWhitespace $Local:line)) {
-
-                        #Write-Color -DarkCyan ($Local:line)
-
-                        # main window title (just one hashtag)
-                        If ($Local:line.StartsWith('# ')) {
-                            $Script:guiconfig["windowtitle"] = $Local:line -replace '# ', ''
-                        }
-
-                        # section labels (two hashtags)
-                        If ($Local:line.StartsWith('## ')) {
-                            $Script:guiconfig.components += @{
-                                "type" = "label"
-                                "label" = $Local:line -replace '## ', ''
-                            }
-                        }
-
-                        # checkboxes
-                        If ($Local:line.StartsWith('### checkbox:')) {
-                            $Script:guiconfig.components += @{
-                                "type" = "checkbox"
-                                "label" = $Local:line -replace '### checkbox:', ''
-                                "commands" = @()
-                            }
-                        }
-
-                        # buttons
-                        If ($Local:line.StartsWith('### button:')) {
-                            $Script:guiconfig.components += @{
-                                "type" = "button"
-                                "label" = $Local:line -replace '### button:', ''
-                                "commands" = @()
-                            }
-                        }
-
-                        # commands
-                        If ($Local:line.StartsWith('`')) {
-                            $command = $line -replace '`', ''
-                            $Script:guiconfig.components[$Script:guiconfig.components.length-1].commands += $command
-                        }
-
-
-
+                    # main window title (just one hashtag)
+                    If ($Local:line.StartsWith('# ')) {
+                        $Script:guiconfig["windowtitle"] = $Local:line -replace '# ', ''
                     }
+
+                    # section labels (two hashtags)
+                    If ($Local:line.StartsWith('## ')) {
+                        $Script:guiconfig.components += @{
+                            "type" = "label"
+                            "label" = $Local:line -replace '## ', ''
+                        }
+                    }
+
+                    # checkboxes
+                    If ($Local:line.StartsWith('### checkbox:')) {
+                        $Script:guiconfig.components += @{
+                            "type" = "checkbox"
+                            "label" = $Local:line -replace '### checkbox:', ''
+                            "commands" = @()
+                        }
+                    }
+
+                    # buttons
+                    If ($Local:line.StartsWith('### button:')) {
+                        $Script:guiconfig.components += @{
+                            "type" = "button"
+                            "label" = $Local:line -replace '### button:', ''
+                            "commands" = @()
+                        }
+                    }
+
+                    # commands
+                    If ($Local:line.StartsWith('`')) {
+                        $command = $line -replace '`', ''
+                        $Script:guiconfig.components[$Script:guiconfig.components.length-1].commands += $command
+                    }
+
+
+
                 }
+            }
 
 
-                # create gui query
-                Write-Color -Gray ' building gui...'
-                GenerateForm
+            # create gui query
+            Write-Color -Gray ' building gui...'
+            GenerateForm
 
-                # code blocked until form returns
-                $Local:num_commands = @($Script:commandstorun).Length
-                Write-Color -Gray " gui returned $Local:num_commands command(s)..."
-                foreach ($command in $Script:commandstorun) {
-                    Write-Host
-                    Write-Color -Yellow " PS> " -Cyan "$command"
-                    iex $command
-                    Write-Color -Yellow " PS> " -Gray " exitcode: " -Red "$(If ($LASTEXITCODE) {$LASTEXITCODE} Else {'no code'})"
-                    Write-Host
+            # code blocked until form returns
+            $Local:num_commands = @($Script:commandstorun).Length
+            Write-Color -Gray " gui returned $Local:num_commands command(s)..."
+            for ($i=0; $i -lt $Script:commandstorun.length; $i++) {
+                $command = $Script:commandstorun[$i]
+                $label = $commandlabels[$i]
+                Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$label> " -Cyan "$command"
+                iex $command
+                Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$label> " -Gray "returned exitcode: " -Red "$(If ($LASTEXITCODE) {$LASTEXITCODE} Else {'no code'})"
+                If ($LASTEXITCODE) {
+                  Exit $LASTEXITCODE
                 }
+            }
 
+            Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Green "END"
 
-                # Initialize-Shortcutsbat function completes here
-
-            } # end working dir exists
+            # Initialize-Shortcutsbat function completes here
 
         } # end config has commands
 
@@ -268,7 +266,8 @@ function GenerateForm {
                 $Script:guiconfig.components[$i].formobject.add_Click({
                     $form1.Hide()
                     for ($m=0; $m -lt $Script:guiconfig.components.length; $m++) {
-                        if($Script:guiconfig.components[$m].formobject.Name -eq $this.Name){
+                        if($Script:guiconfig.components[$m].formobject.Name -eq $this.Name) {
+                            $Script:commandlabels += $Script:guiconfig.components[$m].label
                             for ($n=0; $n -lt $Script:guiconfig.components[$m].commands.length; $n++) {
                                 $Script:commandstorun += $Script:guiconfig.components[$m].commands[$n]
                             }
@@ -319,6 +318,7 @@ function GenerateForm {
             for ($i=0; $i -lt $Script:guiconfig.components.length; $i++) {
                 if ($Script:guiconfig.components[$i].formobject.Checked) {
                     for ($j=0; $j -lt $Script:guiconfig.components[$i].commands.length; $j++) {
+                        $Script:commandlabels += $Script:guiconfig.components[$i].label
                         $Script:commandstorun += $Script:guiconfig.components[$i].commands[$j]
                     }
                 }
@@ -343,9 +343,6 @@ function GenerateForm {
     Write-Color -Gray ' waiting for user...'
     $form1.ShowDialog() | Out-Null
 }
-
-# show info in the console
-Write-Color -Yellow " md2gui.ps1>`t`t" -Cyan (Split-Path -Leaf $Args[0])
 
 # start the checks and mainloop (eventually)
 Initialize-Shortcutsbat $Args[0]

@@ -31,10 +31,18 @@ Remove-Item "$Script:ps1file"
 # Write-Host
 
 $Script:md2guiDirectory = "$Script:ToolDirectory\app"
-while($LASTEXITCODE -ne 410)
+$LASTEXITCODE = 0
+while($LASTEXITCODE -eq 0)
 {
+  Write-Host " --------------------------------"
   . "$Script:md2guiDirectory\md2gui.ps1" "$Script:md2guiDirectory\gui\main\main_menu.md" "$Script:Arguments"
+  Write-Host " --------------------------------"
 }
 Write-Host " >>> exiting..."
 Write-Host
-Start-Sleep -s 1
+If($LASTEXITCODE -eq 410) {
+  Start-Sleep -s 1
+}
+Else {
+  PAUSE
+}

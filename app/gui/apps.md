@@ -1,4 +1,4 @@
-# Chocolatey
+# Install Apps
 
 ### button:Install Chocolatey
 `iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))`
@@ -10,7 +10,7 @@
 `. "$md2guiDirectory\md2gui.ps1" "$md2guiDirectory\gui\chocolatey\developer.md"`
 
 ### button:Update all Chocolatey packages now
-`start powershell {cup all -y; Exit 999}`
+`start powershell {cup all -y}`
 
 ### button:Update all Chocolatey packages on StartUp
 `. "$md2guiDirectory\gui\chocolatey\cupally\install_bat.ps1" "$md2guiDirectory\gui\chocolatey\cupally\cupally.bat"`

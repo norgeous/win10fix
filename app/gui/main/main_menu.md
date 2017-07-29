@@ -1,7 +1,7 @@
 # norgeous/win10fix
 
 ### button:Install apps...
-`. "$md2guiDirectory\md2gui.ps1" "$md2guiDirectory\gui\chocolatey\chocolatey.md"`
+`. "$md2guiDirectory\md2gui.ps1" "$md2guiDirectory\gui\apps.md"`
 
 ### button:Remove win10 bloatware...
 `. "$md2guiDirectory\md2gui.ps1" "$md2guiDirectory\gui\main\crapware.md"`

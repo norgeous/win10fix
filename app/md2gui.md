@@ -34,5 +34,5 @@ any form with checkboxes automatically has a button added to the form (to run se
 ### Git bash shortcut
 in `.bashrc` add:
 ```
-alias t='S:\\path\\too\\win10fix\\tool.bat'
+alias t='S:\\path\\too\\win10fix\\launch.bat'
 ```
