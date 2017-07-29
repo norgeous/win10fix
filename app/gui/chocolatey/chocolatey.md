@@ -10,7 +10,7 @@
 `. "$md2guiDirectory\md2gui.ps1" "$md2guiDirectory\gui\chocolatey\developer.md"`
 
 ### button:Update all Chocolatey packages now
-`cup all -y`
+`start powershell {cup all -y}`
 
 ### button:Update all Chocolatey packages on StartUp
 `. "$md2guiDirectory\gui\chocolatey\cupally\install_bat.ps1" "$md2guiDirectory\gui\chocolatey\cupally\cupally.bat"`
