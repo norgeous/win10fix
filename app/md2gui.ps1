@@ -275,6 +275,7 @@ function GenerateForm {
                         }
                     }
                     $form1.Close()
+                    return
                 })
             }
 
@@ -327,6 +328,7 @@ function GenerateForm {
                 }
             }
             $form1.Close()
+            return
         })
         $form1.Controls.Add($button1)
     }
