@@ -193,15 +193,19 @@ function Initialize-Shortcutsbat($Local:configlocation) {
             # code blocked until form returns
             $Local:num_commands = @($Script:commandstorun).Length
             Write-Color -Gray " gui returned $Local:num_commands command(s)..."
-            for ($Local:i=0; $Local:i -lt $Script:commandstorun.length; $Local:i++) {
-                $command = $Script:commandstorun[$Local:i]
-                $label = $Script:commandlabels[$Local:i]
-                Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$label> " -Cyan "$command"
-                iex $command
-                Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$label> " -Gray "exitcode: $LASTEXITCODE"
+            #for ($Local:i=0; $Local:i -lt $Script:commandstorun.length; $Local:i++) {
+            $Local:counter = 0
+            Foreach ($Local:command in $Script:commandstorun)
+            {
+                #$command = $Script:commandstorun[$Local:i]
+                $Local:label = $Script:commandlabels[$Local:counter]
+                Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$Local:label> " -Cyan "$Local:command"
+                iex $Local:command
+                Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Yellow "$Local:label> " -Gray "exitcode: $LASTEXITCODE"
                 If ($LASTEXITCODE) {
                   Exit $LASTEXITCODE
                 }
+                $Local:counter++
             }
 
             Write-Color -DarkCyan " md2gui.ps1> " -Cyan "$Local:shortcutsfilename> " -Green "END"
