@@ -23,6 +23,8 @@
 `apm install linter-sass-lint`
 ### checkbox:linter-jshint
 `apm install linter-jshint`
+### checkbox:linter-eslint
+`apm install linter-eslint`
 ### checkbox:linter-phpcs
 `choco install -y php composer`
 `composer global require "squizlabs/php_codesniffer=*"`
