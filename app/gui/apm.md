@@ -30,6 +30,8 @@
 `composer global require "squizlabs/php_codesniffer=*"`
 `apm install linter-phpcs`
 ### checkbox:linter-twig
+`choco install -y php composer`
+`composer global require "asm89/twig-lint" "@dev"`
 `apm install linter-twig`
 
 ## Useful
