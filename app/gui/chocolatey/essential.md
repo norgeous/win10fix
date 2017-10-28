@@ -39,8 +39,8 @@
 
 ## Additional
 
-### checkbox:geforce experience
-`choco install -y geforce-experience`
+### checkbox:geforce-game-ready-driver
+`choco install -y geforce-game-ready-driver`
 
 ### checkbox:skype
 `choco install -y skype`
