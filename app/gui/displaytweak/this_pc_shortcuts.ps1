@@ -15,6 +15,7 @@ $keys = @(
   "{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}", # Videos
   "{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0}", # Documents
   "{d3162b92-9365-467a-956b-92703aca08af}", # Documents
+  "{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}", # 3D Objects
   "{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}"  # Desktop
 )
 Foreach ($path in $paths)
