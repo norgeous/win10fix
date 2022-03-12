@@ -18,9 +18,6 @@
 ### checkbox:Disable Automatic Folder Type Discovery
 `Set-ItemProperty -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" -Name FolderType -Type String -Value NotSpecified`
 
-### checkbox:Disable Automatic Folder Type Discovery old
-`regedit /s "$md2guiDirectory\gui\displaytweak\Disable_Automatic_Folder_Type_Discovery.reg"`
-
 ### checkbox:Show file extensions
 `Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name HideFileExt -Type DWord -Value 0`
 
