@@ -14,6 +14,3 @@
 
 ### button:Update all Chocolatey packages on StartUp
 `. "$md2guiDirectory\gui\chocolatey\cupally\install_bat.ps1" "$md2guiDirectory\gui\chocolatey\cupally\cupally.bat"`
-
-### button:Atom packages...
-`. "$md2guiDirectory\md2gui.ps1" "$md2guiDirectory\gui\apm.md"`
