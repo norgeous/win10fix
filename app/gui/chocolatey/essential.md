@@ -12,49 +12,20 @@
 ### checkbox:vlc
 `choco install -y vlc`
 
-### checkbox:jpegview
-`choco install -y jpegview`
-
-## Browser
-
 ### checkbox:firefox
 `choco install -y firefox`
 
 ### checkbox:google chrome
 `choco install -y GoogleChrome`
 
-### checkbox:opera
-`choco install -y opera`
+### checkbox:keepassxc
+`choco install -y keepassxc`
 
-### checkbox:keepass
-`choco install -y keepass`
+### checkbox:libreoffice-fresh
+`choco install -y libreoffice-fresh`
 
-## Software
-
-### checkbox:libre office
-`choco install -y libreoffice`
-
-### checkbox:itunes
-`choco install -y itunes`
-
-## Additional
-
-### checkbox:geforce-game-ready-driver
-`choco install -y geforce-game-ready-driver`
-
-### checkbox:skype
-`choco install -y skype`
-
-### checkbox:tightvnc
-`choco install -y tightvnc`
-
-### checkbox:avirafreeantivirus
-`choco install -y avirafreeantivirus`
 
 ## Non-choc
 
 ### checkbox:spybot antibeacon
 `start https://www.safer-networking.org/spybot-anti-beacon/`
-
-### checkbox:avira
-`start https://www.avira.com/en/avira-free-antivirus`
