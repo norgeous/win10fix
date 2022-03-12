@@ -3,15 +3,6 @@
 ### checkbox:chocolatey gui
 `choco install -y chocolateygui`
 
-### checkbox:7zip
-`choco install -y 7zip`
-
-### checkbox:ccleaner ccenhancer defraggler recuva
-`choco install -y ccleaner ccenhancer defraggler recuva`
-
-### checkbox:vlc
-`choco install -y vlc`
-
 ### checkbox:firefox
 `choco install -y firefox`
 
@@ -24,8 +15,14 @@
 ### checkbox:libreoffice-fresh
 `choco install -y libreoffice-fresh`
 
+### checkbox:steam-client
+`choco install -y steam-client`
 
-## Non-choc
+### checkbox:7zip
+`choco install -y 7zip`
 
-### checkbox:spybot antibeacon
-`start https://www.safer-networking.org/spybot-anti-beacon/`
+### checkbox:ccleaner ccenhancer defraggler recuva
+`choco install -y ccleaner ccenhancer defraggler recuva`
+
+### checkbox:vlc
+`choco install -y vlc`
