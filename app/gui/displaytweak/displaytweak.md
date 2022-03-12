@@ -1,5 +1,11 @@
 # Display Tweaks
 
+### checkbox:Dark mode for system
+`Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\themes\personalize -Name SystemUsesLightTheme -Type DWord -Value 0`
+
+### checkbox:Dark mode for apps
+`Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\themes\personalize -Name AppsUseLightTheme -Type DWord -Value 0`
+
 ### checkbox:Set explorer.exe home as 'This PC'
 `Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 1`
 
