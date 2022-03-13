@@ -36,11 +36,14 @@
 ### checkbox:Remove Microsoft.MicrosoftSolitaireCollection
 `Get-AppxPackage -AllUsers Microsoft.MicrosoftSolitaireCollection | Remove-AppxPackage`
 
-### checkbox:Remove Microsoft.Office
+### checkbox:Remove Microsoft.Office.OneNote
 `Get-AppxPackage -AllUsers Microsoft.Office.OneNote | Remove-AppxPackage`
 
-### checkbox:Remove Microsoft.Office
+### checkbox:Remove Microsoft.Office.Sway
 `Get-AppxPackage -AllUsers Microsoft.Office.Sway | Remove-AppxPackage`
+
+### checkbox:Remove Microsoft.MicrosoftOfficeHub
+`Get-AppxPackage -AllUsers Microsoft.MicrosoftOfficeHub | Remove-AppxPackage`
 
 ### checkbox:Remove Microsoft.People
 `Get-AppxPackage -AllUsers Microsoft.People | Remove-AppxPackage`
@@ -74,6 +77,15 @@
 
 ### checkbox:Remove Disney.37853FC22B2CE
 `Get-AppxPackage -AllUsers Disney.37853FC22B2CE | Remove-AppxPackage`
+
+### checkbox:Remove AdobePhotoshopExpress
+`Get-AppxPackage -AllUsers AdobeSystemsIncorporated.AdobePhotoshopExpress | Remove-AppxPackage`
+
+### checkbox:Remove BytedancePte.Ltd.TikTok
+`Get-AppxPackage -AllUsers BytedancePte.Ltd.TikTok | Remove-AppxPackage`
+
+### checkbox:Remove AmazonVideo.PrimeVideo
+`Get-AppxPackage -AllUsers AmazonVideo.PrimeVideo | Remove-AppxPackage`
 
 ### checkbox:Remove Spotify
 `Get-AppxPackage -AllUsers *Spotify* | Remove-AppxPackage`
