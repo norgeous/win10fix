@@ -26,3 +26,6 @@
 
 ### checkbox:vlc
 `choco install -y vlc`
+
+### checkbox:windirstat
+`choco install -y windirstat`
