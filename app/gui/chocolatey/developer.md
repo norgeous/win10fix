@@ -39,5 +39,5 @@
 ### checkbox:docker-desktop
 `choco install -y docker-desktop`
 
-### checkbox:usb burn
+### checkbox:etcher rpi-imager rufus
 `choco install -y etcher rpi-imager rufus`
