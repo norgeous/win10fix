@@ -6,6 +6,9 @@
 ### checkbox:gimp
 `choco install -y gimp`
 
+### checkbox:pixie
+`choco install -y pixie`
+
 ### checkbox:inkscape
 `choco install -y inkscape`
 
@@ -15,14 +18,26 @@
 ### checkbox:audacity
 `choco install -y audacity`
 
+### checkbox:ffmpeg
+`choco install -y ffmpeg`
+
 ### checkbox:synctrayzor
 `choco install -y synctrayzor`
 
 ### checkbox:nodejs
 `choco install -y nodejs`
 
-### checkbox:python
+### checkbox:python latest
 `choco install -y python`
+
+### checkbox:python 3.10
+`choco install -y python310`
 
 ### checkbox:github-desktop
 `choco install -y github-desktop`
+
+### checkbox:docker-desktop
+`choco install -y docker-desktop`
+
+### checkbox:usb burn
+`choco install -y etcher rpi-imager rufus`
