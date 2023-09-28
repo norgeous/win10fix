@@ -66,6 +66,9 @@
 ### checkbox:Remove Microsoft.XboxIdentityProvider
 `Get-AppxPackage -AllUsers Microsoft.XboxIdentityProvider | Remove-AppxPackage`
 
+### checkbox:Remove Microsoft.XboxGamingOverlay
+`Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage`
+
 ### checkbox:Remove Microsoft.ZuneMusic
 `Get-AppxPackage -AllUsers Microsoft.ZuneMusic | Remove-AppxPackage`
 
