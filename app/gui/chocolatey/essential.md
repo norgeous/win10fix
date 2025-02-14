@@ -24,8 +24,8 @@
 ### checkbox:ccleaner ccenhancer defraggler recuva
 `choco install -y ccleaner ccenhancer defraggler recuva`
 
-### checkbox:vlc
-`choco install -y vlc`
+### checkbox:mpv
+`choco install -y mpv`
 
 ### checkbox:windirstat
 `choco install -y windirstat`
