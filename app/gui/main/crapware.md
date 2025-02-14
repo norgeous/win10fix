@@ -63,11 +63,17 @@
 ### checkbox:Remove Microsoft.XboxApp
 `Get-AppxPackage -AllUsers Microsoft.XboxApp | Remove-AppxPackage`
 
+### checkbox:Remove Microsoft.XboxGamingOverlay
+`Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage`
+
 ### checkbox:Remove Microsoft.XboxIdentityProvider
 `Get-AppxPackage -AllUsers Microsoft.XboxIdentityProvider | Remove-AppxPackage`
 
-### checkbox:Remove Microsoft.XboxGamingOverlay
-`Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage`
+### checkbox:Remove Microsoft.XboxSpeechToTextOverlay
+`Get-AppxPackage -AllUsers Microsoft.XboxSpeechToTextOverlay | Remove-AppxPackage`
+
+### checkbox:Remove Microsoft.XboxGameCallableUI
+`Get-AppxPackage -AllUsers Microsoft.XboxGameCallableUI | Remove-AppxPackage`
 
 ### checkbox:Remove Microsoft.ZuneMusic
 `Get-AppxPackage -AllUsers Microsoft.ZuneMusic | Remove-AppxPackage`
@@ -95,6 +101,12 @@
 
 ### checkbox:Remove Spotify
 `Get-AppxPackage -AllUsers *Spotify* | Remove-AppxPackage`
+
+### checkbox:Remove Microsoft.Copilot
+`Get-AppxPackage -AllUsers Microsoft.Copilot | Remove-AppxPackage`
+
+### checkbox:Remove Microsoft.BingWeather
+`Get-AppxPackage -AllUsers Microsoft.BingWeather | Remove-AppxPackage`
 
 ### checkbox:Remove OneDrive
 `. "$md2guiDirectory\gui\main\RemoveOneDrive.bat"`
