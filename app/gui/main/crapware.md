@@ -120,6 +120,9 @@
 ### checkbox:Remove Microsoft.WindowsSoundRecorder
 `Get-AppxPackage -AllUsers Microsoft.WindowsSoundRecorder | Remove-AppxPackage`
 
+### checkbox:Disable Print Spooler service
+`sc.exe config "spooler" start=disabled`
+
 ### checkbox:Remove OneDrive
 `. "$md2guiDirectory\gui\main\RemoveOneDrive.bat"`
 
