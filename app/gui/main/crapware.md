@@ -112,13 +112,13 @@
 `Get-AppxPackage -AllUsers Microsoft.WindowsFeedbackHub | Remove-AppxPackage`
 
 ### checkbox:Remove Cortana
-`Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage`
+`Get-AppxPackage -AllUsers Microsoft.549981C3F5F10 | Remove-AppxPackage`
 
 ### checkbox:Remove Microsoft.Todos
-`Get-AppxPackage -allusers Microsoft.Todos | Remove-AppxPackage`
+`Get-AppxPackage -AllUsers Microsoft.Todos | Remove-AppxPackage`
 
 ### checkbox:Remove Microsoft.WindowsSoundRecorder
-`Get-AppxPackage -allusers Microsoft.WindowsSoundRecorder | Remove-AppxPackage`
+`Get-AppxPackage -AllUsers Microsoft.WindowsSoundRecorder | Remove-AppxPackage`
 
 ### checkbox:Remove OneDrive
 `. "$md2guiDirectory\gui\main\RemoveOneDrive.bat"`
