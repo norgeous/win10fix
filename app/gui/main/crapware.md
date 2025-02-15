@@ -72,9 +72,6 @@
 ### checkbox:Remove Microsoft.XboxSpeechToTextOverlay
 `Get-AppxPackage -AllUsers Microsoft.XboxSpeechToTextOverlay | Remove-AppxPackage`
 
-### checkbox:Remove Microsoft.XboxGameCallableUI
-`Get-AppxPackage -AllUsers Microsoft.XboxGameCallableUI | Remove-AppxPackage`
-
 ### checkbox:Remove Microsoft.ZuneMusic
 `Get-AppxPackage -AllUsers Microsoft.ZuneMusic | Remove-AppxPackage`
 
