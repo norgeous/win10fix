@@ -117,6 +117,9 @@
 ### checkbox:Remove Microsoft.WindowsSoundRecorder
 `Get-AppxPackage -AllUsers Microsoft.WindowsSoundRecorder | Remove-AppxPackage`
 
+### checkbox:Remove Microsoft.OutlookForWindows
+`Get-AppxPackage -AllUsers Microsoft.OutlookForWindows | Remove-AppxPackage`
+
 ### checkbox:Disable Print Spooler service
 `sc.exe config "spooler" start=disabled`
 
