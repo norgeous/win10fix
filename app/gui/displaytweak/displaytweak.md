@@ -9,11 +9,20 @@
 ### checkbox:Dark mode for apps
 `Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\themes\personalize -Name AppsUseLightTheme -Type DWord -Value 0`
 
-### checkbox:Set taskbar 'small icons'
+### checkbox:Enable "small icons" in taskbar
 `Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarSmallIcons -Type DWord -Value 1`
 
-### checkbox:Don't hide icons in tray
+### checkbox:Don't hide icons in system tray
 `Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer -Name EnableAutoTray -Type DWord -Value 0`
+
+### checkbox:Hide "Search" in taskbar
+`Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name SearchBoxTaskbarMode -Type DWord -Value 0`
+
+### checkbox:Turn off "News and interests" in taskbar
+`Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds -Name EnShellFeedsTaskbarViewMode -Type DWord -Value cc16b430`
+
+### checkbox:Hide "Meet Now" in system tray
+`Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer -Name HideSCAMeetNow -Type DWord -Value 1`
 
 
 ## Windows explorer (explorer.exe)
@@ -41,9 +50,6 @@
 
 
 ## Windows behaviour
-
-### checkbox:Disable Automatic Folder Type Discovery
-`Set-ItemProperty -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" -Name FolderType -Type String -Value NotSpecified`
 
 ### checkbox:Disable UAC
 `Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA -Type DWord -Value 0`
